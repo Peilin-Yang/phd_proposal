@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=latex 2015.9.21)  3 OCT 2016 14:32
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=latex 2015.9.21)  3 OCT 2016 16:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**dissertation-main.tex
+**dissertation-main
 (./dissertation-main.tex
 LaTeX2e <2011/06/27>
 Babel <3.9h> and hyphenation patterns for 4 languages loaded.
@@ -197,7 +197,8 @@ File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 \Gin@req@height=\dimen107
 \Gin@req@width=\dimen108
 )
-No file dissertation-main.aux.
+(./dissertation-main.aux (./dissertation-tap.aux) (./chap1.aux) (./chap2.aux)
+(./ref.aux) (./appA.aux) (./appB.aux))
 \openout1 = `dissertation-main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
@@ -215,6 +216,7 @@ LaTeX Font Info:    ... okay on input line 12.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
 \AtBeginShipoutBox=\box27
+
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 
@@ -239,18 +241,17 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 12.
 LaTeX Info: Redefining \pageref on input line 12.
 LaTeX Info: Redefining \nameref on input line 12.
+
+(./dissertation-main.out) (./dissertation-main.out)
 \@outlinefile=\write3
 \openout3 = `dissertation-main.out'.
 
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
-
 \openout2 = `dissertation-tap.aux'.
 
-(./dissertation-tap.tex
+ (./dissertation-tap.tex
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 26.
- (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
@@ -261,6 +262,14 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 ] [2] [3] [4
 
 ]
+(./dissertation-main.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 1.
+)
 \tf@toc=\write4
 \openout4 = `dissertation-main.toc'.
 
@@ -271,20 +280,22 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 Package hyperref Warning: bookmark level for unknown prefacesection defaults to
  0.
 
+(./dissertation-main.lot)
 \tf@lot=\write5
 \openout5 = `dissertation-main.lot'.
 
-[6
+ [6
 
-]
+] (./dissertation-main.lof)
 \tf@lof=\write6
 \openout6 = `dissertation-main.lof'.
 
  [7
 
-] [8
+] (./abstract.tex)
+[8
 
-])
+] [9])
 \openout2 = `chap1.aux'.
 
  (./chap1.tex
@@ -335,24 +346,17 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 42.
 (./ref.aux) (./appA.aux) (./appB.aux))
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 42.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 42.
-
-
-Package rerunfilecheck Warning: File `dissertation-main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `dissertation-main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  F171889451C0BBD3CFA1C21476413B50;417.
+Package rerunfilecheck Info: File `dissertation-main.out' has not changed.
+(rerunfilecheck)             Checksum: F5C5B47CB869EB39DAF50EEAF34E3883;347.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 42.
  ) 
 Here is how much of TeX's memory you used:
- 4923 strings out of 494986
- 72993 string characters out of 6180382
- 151439 words of memory out of 5000000
- 8117 multiletter control sequences out of 15000+600000
- 5147 words of font info for 19 fonts, out of 8000000 for 9000
+ 4980 strings out of 494986
+ 73730 string characters out of 6180382
+ 154707 words of memory out of 5000000
+ 8141 multiletter control sequences out of 15000+600000
+ 7328 words of font info for 26 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 35i,5n,30p,310b,370s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 35i,5n,27p,306b,376s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on dissertation-main.dvi (11 pages, 14212 bytes).
+Output written on dissertation-main.dvi (12 pages, 23064 bytes).
