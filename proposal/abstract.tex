@@ -13,8 +13,9 @@ In IR research, context plays a crucial role and it is even the basis
 of some IR researches.
 For example, classic IR ranking models are mainly based on 
 bag-of-terms document representation assumption and they mainly 
-consist of Term Frequency, Inverted Document Frequency, Document Length 
-Normalization and other statistics. Here the bag-of-terms assumption 
+consist of Term Frequency (TF), Inverted Document Frequency (IDF), 
+Document Length Normalization (DLN) and other statistics. 
+Here the bag-of-terms assumption 
 and the commonly used statistics are the context if one's goal is to 
 improve the effectiveness of bag-of-terms based ranking models. 
 For evaluation of IR system the ideal case is we have a unified testing 
@@ -56,7 +57,20 @@ the normalization of baseline models much more easier and thus can be trusted
 by future researchers. A large scale experiment based on RISE serves as the 
 the performance reference of most widely used IR models.
 
+We then move to the boundary theory of ranking model performance. 
+The context of this line of research is the bag-of-terms representation of 
+the document assumption and the widely used signals (e.g. TF, IDF, DLN) that 
+the ranking model consists of. We first find that the optimal performances of 
+previous proposed ranking models are similar. To dig it deeper we use the 
+cost/gain analysis which is commonly used in learning-to-rank (LTR) regime 
+to find the optimum of single term queries for a family of ranking models that 
+share similar strategy of combining key signals. 
 
+The third part of this proposal is to investigate the usage of opinion to 
+contextual suggestion. Previous studies treat the general recommendation 
+problem as either content based or collaborative filtering. We are the first 
+ones leveraging the opinions from not only the user's activity history but 
+also the opinions from similar users to model the user profile. 
 
 
 
