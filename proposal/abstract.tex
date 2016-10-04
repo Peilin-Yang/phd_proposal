@@ -3,40 +3,72 @@
 %
 Information Retrieval (IR) is one of the most evolving research fields 
 and has drawn extensive attention in recent years. 
-How to effectively address users information needs in one of the most 
-important goal of IR research. This lays in the improvement of ranking 
-models on top of traditional approaches. Besides this goal, there 
-are several other aspects which are also crucial to the success of IR 
-system. For example, the evaluation streamline is one of the key 
-components of IR system where different ranking approaches can be 
-easily compared and evaluated. 
-Moreover, there are many other web applications which 
-are highly related to the IR system. One of such domain is recommendation 
-system where researchers tried their best to incorporate IR techniques 
-hoping to satisfy different users needs.
+The primary goal of IR research is to effectively address user's 
+information needs such as search via text queries or recommendation 
+based on historical activities. 
 
-The word ``\textit{Context}'' is originally defined as ``the set of circumstances or facts that surround a particular event, situation, etc.'' 
-Previous studies in IR seldom treat the context as a separated yet 
-crucial part. But context indeed plays an very important role and it 
-is even the basis of the aforementioned IR research.
+%The word ``\textit{Context}'' is originally defined as 
+%``the set of circumstances or facts that surround a particular event, situation, etc.'' 
+In IR research, context plays a crucial role and it is even the basis 
+of some IR researches.
 For example, classic IR ranking models are mainly based on 
 bag-of-terms document representation assumption and they mainly 
 consist of Term Frequency, Inverted Document Frequency, Document Length 
 Normalization and other statistics. Here the bag-of-terms assumption 
 and the commonly used statistics are the context if one's goal is to 
-improve the effectiveness of bag-of-terms ranking models. 
-For evaluation of IR system the context would be the unified testing 
-environment where all the ranking models are judged purely based on 
-their method/algorithm and the results are standardized. Here the unified 
-testing environment is the context of the evaluation process. 
-When dealing with places/venues recommendation the context would be the 
-user's geographic location, temporal information and other related 
-information. 
-
+improve the effectiveness of bag-of-terms based ranking models. 
+For evaluation of IR system the ideal case is we have a unified testing 
+environment where the ranking models are purely judged based on 
+the effectiveness of their algorithms and the results are standardized. 
+Here the ideal unified testing environment is the context of the 
+evaluation process. 
+Another example comes from the IR recommendation system which is called 
+contextual suggestion. For contextual suggestion the problem is to recommend 
+interesting venues to the users based on contextual information such as 
+geographic location, temporal information and user's activity history. 
+Context again, as the name of the problem shows, highlights this direction 
+of research effort. 
+Previous studies in IR rarely separated the context apart from other 
+components of IR research problem. 
 In this proposal, we identify the contexts of three different domains 
-of IR researches and investigate their impacts. We start with the 
-unified IR evaluation system. Traditionally, a newly proposed IR 
-ranking model is evaluated against several standard data collections 
-and the performances are compared with commonly used baselines, e.g. 
-BM25 ranking model. The problem of such methodology is that 
+of IR researches and investigate their impacts. 
+
+We start with the unified IR evaluation system. Previously, the typical 
+workflow of proposing a new IR ranking model is to implement the algorithm 
+using the most convenient tool (e.g. Indri, Lucene, Terrier) of the 
+researcher's choice. The ranking model is then evaluated against standard 
+data collections and the performances are compared with commonly used 
+baselines, e.g. BM25 ranking model. The problem of such methodology is that 
+different tools and experimental settings of researcher's choice, i.e. the 
+context of such approach varies and thus cast doubts on the real effectiveness 
+of the proposed ranking models. 
+We have monitored the adverse effect brought by the aforementioned problem and 
+explore the usage of the standardized IR evaluation environment. 
+VIRLab as our first attempt to alleviate the problem provides an easy-to-use 
+IR evaluation system where user of the system can implement her/his our model 
+without considering too much about the underlying framework. 
+An Privacy Preserve Evaluation (PPE) system based on commercial data 
+collection enables the API based IR evaluation without the redistribution 
+of data collections due to privacy/license issue.
+A web based Reproducible IR Evaluation System (RISE) is the first ever known 
+system that users of the system can collaborate with each other and thus make 
+the normalization of baseline models much more easier and thus can be trusted 
+by future researchers. A large scale experiment based on RISE serves as the 
+the performance reference of most widely used IR models.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
