@@ -9,28 +9,34 @@ based on historical activities.
 
 %The word ``\textit{Context}'' is originally defined as 
 %``the set of circumstances or facts that surround a particular event, situation, etc.'' 
-In IR research, context plays a crucial role and it is even the basis 
-of some IR researches.
+In IR research, context plays a crucial role and it is the basis of some very 
+important IR research effort.
 For example, classic IR ranking models are mainly based on 
 bag-of-terms document representation assumption and they mainly 
-consist of Term Frequency (TF), Inverted Document Frequency (IDF), 
-Document Length Normalization (DLN) and other statistics. 
+consist of statistics such as Term Frequency (TF), 
+Inverted Document Frequency (IDF), 
+Document Length Normalization (DLN) and other collection statistics. 
 Here the bag-of-terms assumption 
-and the commonly used statistics are the context if one's goal is to 
-improve the effectiveness of bag-of-terms based ranking models. 
-For evaluation of IR system the ideal case is we have a unified testing 
-environment where the ranking models are purely judged based on 
-the effectiveness of their algorithms and the results are standardized. 
-Here the ideal unified testing environment is the context of the 
-evaluation process. 
-Another example comes from the IR recommendation system which is called 
-contextual suggestion. For contextual suggestion the problem is to recommend 
-interesting venues to the users based on contextual information such as 
-geographic location, temporal information and user's activity history. 
+and the commonly used statistics are the context of the ranking models. 
+Another example comes from the IR evaluation. 
+For evaluation of IR system the ideal case is we use a unified testing 
+environment to assess the ranking models. 
+The evaluation process is then purely based on the algorithms since the 
+unified testing environment takes care of the possible processing stages, 
+e.g. prepare the data and standardize the results. 
+Here the ideal unified testing environment is the context of the evaluation 
+process. 
+For the third example we choose one of the IR recommendation system which is 
+called contextual suggestion. For contextual suggestion the problem is to 
+recommend interesting venues to the users based on contextual information 
+such as geographic location, temporal information and user's activity history. 
 Context again, as the name of the problem shows, highlights this direction 
 of research effort. 
 Previous studies in IR rarely separated the context apart from other 
-components of IR research problem. 
+components of IR research problem. However, we argue that the context of 
+different IR systems or components should be carefully treated and extensively 
+studied as the impact of the context is big enough to question the foundation 
+of some IR studies.
 In this proposal, we identify the contexts of three different domains 
 of IR researches and investigate their impacts. 
 
@@ -45,9 +51,9 @@ context of such approach varies and thus cast doubts on the real effectiveness
 of the proposed ranking models. 
 We have monitored the adverse effect brought by the aforementioned problem and 
 explore the usage of the standardized IR evaluation environment. 
-VIRLab as our first attempt to alleviate the problem provides an easy-to-use 
-IR evaluation system where user of the system can implement her/his our model 
-without considering too much about the underlying framework. 
+VIRLab as our first attempt to alleviate the problem. It provides an 
+easy-to-use IR evaluation system where user of the system can implement 
+her/his our model without considering too much about the underlying framework. 
 An Privacy Preserve Evaluation (PPE) system based on commercial data 
 collection enables the API based IR evaluation without the redistribution 
 of data collections due to privacy/license issue.
@@ -59,18 +65,42 @@ the performance reference of most widely used IR models.
 
 We then move to the boundary theory of ranking model performance. 
 The context of this line of research is the bag-of-terms representation of 
-the document assumption and the widely used signals (e.g. TF, IDF, DLN) that 
-the ranking model consists of. We first find that the optimal performances of 
-previous proposed ranking models are similar. To dig it deeper we use the 
-cost/gain analysis which is commonly used in learning-to-rank (LTR) regime 
-to find the optimum of single term queries for a family of ranking models that 
-share similar strategy of combining key signals. 
+the document assumption and the widely used statistics (e.g. TF, IDF, DLN) 
+that the ranking model consists of. We first compare the optimal 
+performances of state-of-the-art ranking models and find the optimums 
+are similar for those models even the underlying theories are different. 
+To dig it deeper we use the cost/gain analysis which is commonly used in 
+learning-to-rank (LTR) regime to find the optimum of single term queries for 
+a family of ranking models that share similar strategy of combining key 
+signals. The result shows that although the performances of state-of-the-art 
+ranking models are quit close to the practical optimum there is still some 
+room for improvement.
 
-The third part of this proposal is to investigate the usage of opinion to 
-contextual suggestion. Previous studies treat the general recommendation 
-problem as either content based or collaborative filtering. We are the first 
-ones leveraging the opinions from not only the user's activity history but 
-also the opinions from similar users to model the user profile. 
+The third domain is to investigate the usage of opinion to contextual 
+suggestion. Previous studies treat the general recommendation 
+problem as either content based filtering or collaborative filtering. 
+We are the first ones leveraging the opinions from not only the user's 
+activity history but also the opinions from similar users to model the user 
+profile. Such methodology naturally combines the content based filtering and 
+collaborative filtering into one model. By modeling the candidate suggestions 
+in the similar fashion, the similarities between the candidates and the user 
+profile are used to score the candidates. Opinions are also used to generate 
+personalized and high quality summaries of the suggestions. Experiments on 
+TREC collections and a Yelp data collection reveals the advantage of our method.
+
+For the future work, there are mainly two directions we would like to explore more. 
+First is to further investigate the impact of the context of unified 
+IR evaluation system. We would like to explorer more about the impact 
+introduced by using different tools with choices of different components 
+of the evaluation system. We hope the findings are two folds: 
+(1) the impact brought by the different choices of the components of IR 
+evaluation system, and (2) standardize and quantify the impact so that the IR 
+community could be aware of such divergence and can better evaluate the 
+contributions of using various tools. 
+Second is to provide more sound justification about the boundary theory 
+of ranking model performance. Specifically, we want to extend the current 
+analysis on the single term queries to multiple term queries. We also would 
+like to try other method, e.g. explanatory analysis, to achieve the same goal.
 
 
 
