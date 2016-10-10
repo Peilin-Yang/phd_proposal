@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  10 OCT 2016 13:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  10 OCT 2016 14:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -311,21 +311,26 @@ Package hyperref Warning: bookmark level for unknown prefacesection defaults to
 ] (./abstract.tex
 [8
 
-] [9]) [10])
+]) [9])
 \openout2 = `chap1.aux'.
 
  (./chap1.tex
 Chapter 1.
-)pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
- been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.54 
+      [1
+
+
+
+])pdfTeX warning (ext4): destination with the same identifier (name{page.2}) ha
+s been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.17 \include{chap1}
-                        % This file (chap1.tex) contains the text [1
-
-
-
-]
+                        % This file (chap1.tex) contains the text [2]
 \openout2 = `chap2.aux'.
 
 
@@ -338,12 +343,12 @@ References.
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\uppercase' on input line 5.
 
-)pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
+)pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.23 \include{ref}
-                        % This file (ref.tex) contains the text [2
+                        % This file (ref.tex) contains the text [3
 
 
 
@@ -357,12 +362,7 @@ Appendix A.
 
 Package hyperref Warning: bookmark level for unknown appendix defaults to 0.
 
-)pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has
- been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.36 \include{appA}
-                        % This file (appA.tex) contains the text [3
+) [4
 
 
 
@@ -384,7 +384,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 42.
 Here is how much of TeX's memory you used:
  5353 strings out of 493014
  79160 string characters out of 6133351
- 165555 words of memory out of 5000000
+ 167555 words of memory out of 5000000
  8805 multiletter control sequences out of 15000+600000
  7328 words of font info for 26 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -395,7 +395,7 @@ Here is how much of TeX's memory you used:
 usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr
 /local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
 local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation-main.pdf (13 pages, 78371 bytes).
+Output written on dissertation-main.pdf (13 pages, 79386 bytes).
 PDF statistics:
  131 PDF objects out of 1000 (max. 8388607)
  108 compressed objects within 2 object streams

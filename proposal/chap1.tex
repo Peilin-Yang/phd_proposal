@@ -5,7 +5,8 @@
 The past decades have witnessed the tremendous success of World Wide Web. 
 People all over the world can now access to publicly available 
 information via commercial search engines such as Google, Microsoft Bing 
-with great ease. According to the online statistics \footnote{http://www.internetlivestats.com/google-search-statistics/}, 
+with great ease. According to the online statistics 
+\footnote{http://www.internetlivestats.com/google-search-statistics/}, 
 Google now (as of October 2016) can handle over 40,000 search queries 
 every second on average, which translates to over 3.5 billion searches 
 per day and 1.2 trillion searches per year worldwide. 
@@ -13,12 +14,38 @@ With such huge volume of search activities it is essential to make the
 search results of high quality in order to meet the users needs.
 
 Information Retrieval (IR), usually used by academia in favor of its 
-industrial counterpart search engine, 
-is one of the most evolving fields and has drawn extensive attention in 
-recent years. 
+industrial counterpart search engine, is one of the most evolving fields and 
+has drawn extensive attention in recent years. 
 Besides the search quality which is the most direct goal of IR, there 
 are several other aspects which are also crucial to the success of IR 
-system. For example, the evaluation streamline is one of the key 
+system. 
+For example, classic IR ranking models are mainly based on 
+bag-of-terms document representation assumption and they mainly 
+consist of statistics such as Term Frequency (TF), 
+Inverted Document Frequency (IDF), 
+Document Length Normalization (DLN) and other collection statistics. 
+Here the bag-of-terms assumption 
+and the commonly used statistics are the context of the ranking models. 
+Another example comes from the IR evaluation. 
+For evaluation of IR system the ideal case is we use a unified testing 
+environment to assess the ranking models. 
+The evaluation process is then purely based on the algorithms since the 
+unified testing environment takes care of the possible processing stages, 
+e.g. prepare the data and standardize the results. 
+Here the ideal unified testing environment is the context of the evaluation 
+process. 
+For the third example we choose one of the IR recommendation system which is 
+called contextual suggestion. For contextual suggestion the problem is to 
+recommend interesting venues to the users based on contextual information 
+such as geographic location, temporal information and user's activity history. 
+Context again, as the name of the problem shows, highlights this direction 
+of research effort. 
+Previous studies in IR rarely separated the context apart from other 
+components of IR research problem. However, we argue that the context of 
+different IR systems or components should be carefully treated and extensively 
+studied as the impact of the context is big enough to question the foundation 
+of some IR studies.
+For example, the evaluation streamline is one of the key 
 components of IR system where different ranking approaches can be 
 easily compared. Moreover, there are many other web applications which 
 are highly related to the IR system. One of such domain is recommendation 
@@ -32,3 +59,6 @@ based on historical activities.
 
 %The word ``\textit{Context}'' is originally defined as 
 %``the set of circumstances or facts that surround a particular event, situation, etc.'' 
+
+Opinions are also used to generate personalized and high 
+quality summaries of the suggestions. 
