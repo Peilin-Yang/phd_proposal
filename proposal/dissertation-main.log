@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  10 OCT 2016 14:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  10 OCT 2016 16:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -186,7 +186,7 @@ File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 \Gin@req@width=\dimen108
 )
 (./dissertation-main.aux (./dissertation-tap.aux) (./chap1.aux) (./chap2.aux)
-(./ref.aux) (./appA.aux) (./appB.aux))
+(./bibtex.aux))
 \openout1 = `dissertation-main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
@@ -316,11 +316,15 @@ Package hyperref Warning: bookmark level for unknown prefacesection defaults to
 
  (./chap1.tex
 Chapter 1.
+
+LaTeX Warning: Citation `Singhal:1996:PDL:243199.243206' on page 1 undefined on
+ input line 22.
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.54 
+l.66 
       [1
 
 
@@ -335,70 +339,43 @@ l.17 \include{chap1}
 
 
 No file chap2.tex.
-\openout2 = `ref.aux'.
+\openout2 = `bibtex.aux'.
 
-(./ref.tex
-References.
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\uppercase' on input line 5.
-
-)pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has
- been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.23 \include{ref}
-                        % This file (ref.tex) contains the text [3
-
-
-
-
-
-]
-\openout2 = `appA.aux'.
-
- (./appA.tex
-Appendix A.
-
-Package hyperref Warning: bookmark level for unknown appendix defaults to 0.
-
-) [4
-
-
-
-]
-\openout2 = `appB.aux'.
-
-
-No file appB.tex.
+(./bibtex.tex
+No file dissertation-main.bbl.
+)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 42.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 42.
-(./dissertation-main.aux (./dissertation-tap.aux) (./chap1.aux) (./chap2.aux)
-(./ref.aux) (./appA.aux) (./appB.aux))
+ (./dissertation-main.aux (./dissertation-tap.aux) (./chap1.aux) (./chap2.aux) 
+(./bibtex.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 42.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 42.
 Package rerunfilecheck Info: File `dissertation-main.out' has not changed.
-(rerunfilecheck)             Checksum: F5C5B47CB869EB39DAF50EEAF34E3883;347.
+(rerunfilecheck)             Checksum: B90825A55A8A876E9ACEE110290608B6;246.
+
+
+LaTeX Warning: There were undefined references.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 42.
  ) 
 Here is how much of TeX's memory you used:
- 5353 strings out of 493014
- 79160 string characters out of 6133351
- 167555 words of memory out of 5000000
- 8805 multiletter control sequences out of 15000+600000
+ 5335 strings out of 493014
+ 79034 string characters out of 6133351
+ 167911 words of memory out of 5000000
+ 8801 multiletter control sequences out of 15000+600000
  7328 words of font info for 26 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 35i,5n,27p,310b,354s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 35i,5n,27p,209b,354s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></
 usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr
 /local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
 local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation-main.pdf (13 pages, 79386 bytes).
+Output written on dissertation-main.pdf (11 pages, 76976 bytes).
 PDF statistics:
- 131 PDF objects out of 1000 (max. 8388607)
- 108 compressed objects within 2 object streams
- 23 named destinations out of 1000 (max. 500000)
- 57 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 111 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
+ 19 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
