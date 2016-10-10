@@ -1,6 +1,7 @@
 *.bbl
 *.blg
 *.log
+*.out
 *.aux
 *.dvi
 *.ps
