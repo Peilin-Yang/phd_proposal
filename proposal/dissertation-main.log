@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  10 OCT 2016 13:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  10 OCT 2016 13:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -311,7 +311,7 @@ Package hyperref Warning: bookmark level for unknown prefacesection defaults to
 ] (./abstract.tex
 [8
 
-]) [9])
+] [9]) [10])
 \openout2 = `chap1.aux'.
 
  (./chap1.tex
@@ -382,9 +382,9 @@ Package rerunfilecheck Info: File `dissertation-main.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 42.
  ) 
 Here is how much of TeX's memory you used:
- 5352 strings out of 493014
- 79154 string characters out of 6133351
- 164555 words of memory out of 5000000
+ 5353 strings out of 493014
+ 79160 string characters out of 6133351
+ 165555 words of memory out of 5000000
  8805 multiletter control sequences out of 15000+600000
  7328 words of font info for 26 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -395,10 +395,10 @@ Here is how much of TeX's memory you used:
 usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr
 /local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
 local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on dissertation-main.pdf (12 pages, 77982 bytes).
+Output written on dissertation-main.pdf (13 pages, 78371 bytes).
 PDF statistics:
- 126 PDF objects out of 1000 (max. 8388607)
- 104 compressed objects within 2 object streams
- 22 named destinations out of 1000 (max. 500000)
+ 131 PDF objects out of 1000 (max. 8388607)
+ 108 compressed objects within 2 object streams
+ 23 named destinations out of 1000 (max. 500000)
  57 words of extra memory for PDF output out of 10000 (max. 10000000)
 
