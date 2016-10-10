@@ -4,40 +4,41 @@
 Information Retrieval (IR) is one of the most evolving research fields 
 and has drawn extensive attention in recent years. 
 In IR research, context plays a crucial role and it is the fundamental basis 
-of some very important IR research effort.
-For example, classic IR ranking models are mainly based on 
-bag-of-terms document representation assumption and they mainly 
-consist of statistics such as Term Frequency (TF), 
-Inverted Document Frequency (IDF), 
-Document Length Normalization (DLN) and other collection statistics. 
-Here the bag-of-terms assumption 
-and the commonly used statistics are the context of the ranking models. 
-Another example comes from the IR evaluation. 
-For evaluation of IR system the ideal case is we use a unified testing 
-environment to assess the ranking models. 
-The evaluation process is then purely based on the algorithms since the 
-unified testing environment takes care of the possible processing stages, 
-e.g. prepare the data and standardize the results. 
-Here the ideal unified testing environment is the context of the evaluation 
-process. 
-For the third example we choose one of the IR recommendation system which is 
-called contextual suggestion. For contextual suggestion the problem is to 
-recommend interesting venues to the users based on contextual information 
-such as geographic location, temporal information and user's activity history. 
-Context again, as the name of the problem shows, highlights this direction 
-of research effort. 
-Previous studies in IR rarely separated the context apart from other 
-components of IR research problem. However, we argue that the context of 
-different IR systems or components should be carefully treated and extensively 
-studied as the impact of the context is big enough to question the foundation 
-of some IR studies.
-In this proposal, we identify the contexts of three different domains 
-of IR researches and investigate their impacts. 
+of some very important IR research efforts.
+% For example, classic IR ranking models are mainly based on 
+% bag-of-terms document representation assumption and they mainly 
+% consist of statistics such as Term Frequency (TF), 
+% Inverted Document Frequency (IDF), 
+% Document Length Normalization (DLN) and other collection statistics. 
+% Here the bag-of-terms assumption 
+% and the commonly used statistics are the context of the ranking models. 
+% Another example comes from the IR evaluation. 
+% For evaluation of IR system the ideal case is we use a unified testing 
+% environment to assess the ranking models. 
+% The evaluation process is then purely based on the algorithms since the 
+% unified testing environment takes care of the possible processing stages, 
+% e.g. prepare the data and standardize the results. 
+% Here the ideal unified testing environment is the context of the evaluation 
+% process. 
+% For the third example we choose one of the IR recommendation system which is 
+% called contextual suggestion. For contextual suggestion the problem is to 
+% recommend interesting venues to the users based on contextual information 
+% such as geographic location, temporal information and user's activity history. 
+% Context again, as the name of the problem shows, highlights this direction 
+% of research effort. 
+% Previous studies in IR rarely separated the context apart from other 
+% components of IR research problem. However, we argue that the context of 
+% different IR systems or components should be carefully treated and extensively 
+% studied as the impact of the context is big enough to question the foundation 
+% of some IR studies.
+% In this proposal, we identify the contexts of three different domains 
+% of IR researches and investigate their impacts. 
 
-We start with the unified IR evaluation system. Previously, the typical 
-workflow of proposing a new IR ranking model is to implement the algorithm 
-using the most convenient tool (e.g. Indri, Lucene, Terrier) of the 
-researcher's choice. The ranking model is then evaluated against standard 
+The first scenario is the unified IR evaluation system. 
+Previously, the typical work-flow of proposing a new IR ranking model is to 
+implement the algorithm using the most convenient tool (e.g. Indri, Lucene, 
+Terrier) of the researcher's choice. 
+The ranking model is then evaluated against standard 
 data collections and the performances are compared with commonly used 
 baselines, e.g. BM25 ranking model. The problem of such methodology is that 
 different tools and experimental settings of researcher's choice, i.e. the 
@@ -57,9 +58,10 @@ the normalization of baseline models much more easier and thus can be trusted
 by future researchers. A large scale experiment based on RISE serves as the 
 the performance reference of most widely used IR models.
 
-We then move to the boundary theory of ranking model performance. 
+Another example is the boundary theory of ranking model performance. 
 The context of this line of research is the bag-of-terms representation of 
-the document assumption and the widely used statistics (e.g. TF, IDF, DLN) 
+the document assumption and the widely used statistics, e.g. Term Frequency 
+(TF), Inverted Document Frequency (IDF), Document Length Normalization(DLN), 
 that the ranking model consists of. We first compare the optimal 
 performances of state-of-the-art ranking models and find the optimums 
 are similar for those models even the underlying theories are different. 
