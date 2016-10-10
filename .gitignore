@@ -3,7 +3,9 @@
 *.blg
 *.dvi
 *.gz
+*.lof
 *.log
+*.lot
 *.out
 *.ps
 *.toc
