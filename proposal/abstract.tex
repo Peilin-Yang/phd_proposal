@@ -3,46 +3,38 @@
 %
 Information Retrieval (IR) is one of the most evolving research fields 
 and has drawn extensive attention in recent years. 
-Typically, there are several types of IR systems targeting to meet different 
-users' information needs. 
-For example, for IR researchers they want an IR system which is more 
+Typically, there are different types of IR systems targeting to meet 
+different users' information needs. 
+For IR researchers they want an IR system which is more 
 fundamental, transparent and touchable. Such system could offer the researchers 
 the ability to easily modify, test and iterate their hypothesis. 
-We call this kind of system IR System for Researchers (IRSR). Examples 
-include Indri, Lucene, etc.
-Another kind of IR system is mainly for end users. Users of the system 
-do not necessarily know the details of how to design, how to implement the 
-ranking algorithm of the system -- they just need to know how to use the 
-system to meet their information needs.
-We would call this type of system IR System for End Users (IRSEU). 
-The typical examples fall into this category would be search engines like 
-Google or Baidu.
+On the other hand, an IR system could also be mainly for end users. 
+Users of the system do not necessarily know the details of how to design, 
+how to implement the ranking algorithm of the system -- they just need to know 
+how to use the system to meet their information needs.
 
 In order to make better IR systems that are satisfied for both researchers 
-and end users, in our work we explorer the contexts of two 
-
-In IR research, context plays a crucial role and it is the fundamental basis 
-of some very important IR research efforts.
-In this proposal, we identify the contexts of three different domains 
-of IR researches and investigate their impacts. 
-
-The first scenario is the unified IR evaluation system. 
+and end users, in our work we explorer the impact of context in two specific 
+long-term IR related tasks -- ranking model performance upper bound analysis 
+using unified evaluation system and contextual suggestion.
+ 
 Previously, the typical work-flow of proposing a new IR ranking model is to 
-implement the algorithm using the most convenient tool (e.g. Indri) of the researcher's choice. 
-The ranking model is then evaluated against standard 
-data collections and the performances are compared with commonly used 
-baselines (e.g. BM25) and the advantage of the proposed model is shown. 
+implement the algorithm using the most convenient tool (e.g. Indri) of the 
+researcher's choice. 
+The ranking model is then evaluated against standard data collections and 
+the performances are compared with commonly used baselines (e.g. BM25 \cite{Robertson96okapiat3}) 
+and the advantage of the proposed model is presented. 
 The problem of such methodology is that different tools and experimental 
-settings may result in different results for the same model and thus cast 
-doubts on the real effectiveness of the proposed ranking models. 
-We have monitored the adverse effect brought by the aforementioned problem and 
-explore the usage of the standardized IR evaluation environment. 
-VIRLab as our first attempt to alleviate the problem. It provides an 
-easy-to-use IR evaluation system where user of the system can implement 
-her/his our model without considering too much about the underlying framework. 
-% An Privacy Preserve Evaluation (PPE) system based on commercial data 
-% collection enables the API based IR evaluation without the redistribution 
-% of data collections due to privacy/license issue.
+settings may result in different results for the same model \cite{Yang:2016:RSI:2970398.2970415} 
+and this is a long standing problem of IR community for over 20 years \cite{Armstrong:2009:IDA:1645953.1646031}. The fact casts doubts on the real 
+effectiveness of the proposed ranking models and it is essential for the 
+IR community to have a unified evaluation system so that ranking models 
+can be compared without considering the details -- usually other components 
+of an IR system, e.g. preprocessing of documents, choice of evaluation metrics. 
+In our work we propose two unified IR evaluation systems to alleviate this problem. 
+VIRLab as our first attempt. It provides an easy-to-use IR evaluation system 
+where user of the system can implement her/his our model without considering 
+too much about the underlying framework.
 A web based Reproducible IR Evaluation System (RISE) is the first ever known 
 system that users of the system can collaborate with each other and thus make 
 the normalization of baseline models much more easier and thus can be trusted 
