@@ -127,15 +127,20 @@ temporal information and user's activity history.
 Context again, as the name of the problem shows, highlights this direction 
 of research effort. 
 
-There are two necessary steps to perform the location-based contextual 
-suggestion: 1) identify a set of candidates that satisfy the contextual 
+There are two necessary steps to tackle the contextual suggestion problem: 
+(1) identify a set of candidates that satisfy the contextual 
 requirements, e.g., places of interest that are close to a target place; 
-(2)rank the candidates with respect to the user interest. Here we assume that 
-the candidates from the first step are given, and we focus on developing 
-effective solution for the second step.User profiling is essential to 
-effectively rank candidate places with respect to a user's information need. 
-Previous studies explored the category and description information about 
-places to construct user profiles [46]. We argue that only using category 
+(2) rank the candidates with respect to the user interest. 
+In our work we focus on the second problem assuming the first requirement 
+has already been fulfilled. 
+User profiling is the key component to effectively rank candidate places 
+with respect to a user's information need and the question for us is how 
+to effectively model the user profile? We first propose to leverage the 
+category and description information about the places in user's activity 
+history to construct user profiles \cite{udel:treccs2012}. 
+The advantage of such approach is the ease of computation and the satisfactory 
+results \cite{adriel:overview}. 
+We argue that only using category 
 or description to build a user profile is not sufficient: category of places 
 is too general to capture a user's underlying needs; while the text 
 description of a place is too specific to be generalized to other places.
