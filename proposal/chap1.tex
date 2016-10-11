@@ -14,23 +14,20 @@ With such huge volume of search activities it is essential to make the
 search results of high quality in order to meet the users needs.
 
 Information Retrieval (IR), usually used by academia in favor of its 
-industrial counterpart search engine, is one of the most evolving fields and 
-has drawn extensive attention in recent years.
+industrial counterpart search engine, is one of the most evolving fields 
+and has drawn extensive attention in recent years.
 The primary goal of IR research is to improve the effectiveness or the 
 efficiency or both of the textual retrieval system. 
 There are many related works dedicated to this line of research already
 \cite{Robertson96okapiat3,Singhal:1996:PDL:243199.243206,Zhai:2004:SSM:984321.984322,Fang:2005:EAA:1076034.1076116,Wu:2013:IAE:2484028.2484051,Liu2015}. 
-Like everything in the world the various IR researches have their own 
-context. The context could be the experiment settings. It can also be the 
-assumptions on which the ranking model relies. 
-
 
 The word ``\textit{Context}'' is originally defined as 
-``the set of circumstances or facts that surround a particular event, situation, etc.'' 
-In IR research the context always plays an crucial role and it is the 
+``the set of circumstances or facts that surround a particular event, situation, etc.''
+Context always play important role in IR research. It is even the 
 fundamental basis of some very important IR research efforts. 
-In our work, we pick three distinct domains to show the existence and 
-the impact of the context.
+The context in IR could be the experiment settings. 
+It can also be the assumptions on which the ranking model relies. 
+In our work, we pick three domains to show the existence and the impact of the context.
 
 \section{Unified IR Evaluation System}
 The first domain is related to the evaluation of IR system. 
@@ -143,7 +140,8 @@ results \cite{adriel:overview}.
 We further find that using category or description to build a user profile 
 is not enough: category of places is too general to capture a user's 
 underlying needs; while the text description of a place is too specific to 
-be generalized to other places. In another study we leverage opinion, 
+be generalized to other places. In other studies \cite{udel:treccs2013,udel:treccs2014,udel:treccs2015,Yang:2013:OUP:2499178.2499191,Yang2015}
+we leverage opinion, 
 i.e. opinion ratings and the associated text reviews, to construct an 
 opinionated user profile. By doing like this we aim to explain 
 ``why the user likes or dislikes thesuggestion'' instead of simply recording 
@@ -162,36 +160,31 @@ Experiment results on TREC collections and a self-crawled Yelp collection
 validate the effectiveness of our method.
 
 
+\section{Summary}
+
 Previous studies in IR rarely separated the context apart from other 
-components of IR research problem. However, we argue that the context of 
-different IR systems or components should be carefully treated and extensively 
-studied as the impact of the context is big enough to question the foundation 
-of some IR studies.
-For example, the evaluation streamline is one of the key 
-components of IR system where different ranking approaches can be 
-easily compared. Moreover, there are many other web applications which 
-are highly related to the IR system. One of such domain is recommendation 
-system where researchers tried their best to incorporate IR techniques 
-with this area hoping to satisfy users different needs.
+components of a specific research problem. However, we argue that the 
+context of different IR systems or components should be carefully treated 
+and extensively studied as the impact of the context is big enough to 
+question the foundation of some IR studies, e.g. the ones aforementioned above.
 
-Apparently, the context of 
-every line of research effort in IR should be standardized so that the 
-full picture could be seen clearly. 
-However, there is few literatures dedicated to elaborate on the context 
-of these research efforts.
+As of future work, we would further explorer in two directions. 
+The first one is to quantify the impact of the context of unified 
+IR evaluation system. There is no previous work on how much difference does 
+the usage of different retrieval tools bring.
+We hope to be the first to report on standardizing and quantifying the 
+impact so that the IR community could be aware of such divergence and can 
+better evaluate the contributions of using various tools. 
+The second one is to provide more sound justification about the boundary 
+theory of ranking model performance. Specifically, we want to extend the 
+current analysis on the single term queries to multiple term queries. 
+We also would like to try other method, e.g. explanatory analysis, 
+to achieve the same goal.
 
-
-
-Without clearly defining of the context of each line of research we might get  
-dim results and this is not a good sign for the whole IR community. 
-Here we show three domains that extensively studied in this dissertation. 
-
-
-
-
-The primary goal of IR research is to effectively address user's 
-information needs such as search via text queries or recommendation 
-based on historical activities. 
-
-Opinions are also used to generate personalized and high 
-quality summaries of the suggestions. 
+The rest of the thesis is organized as follows. First, we discuss related 
+work in Chapter 2. We describe our reproducibility study using VIRLab and 
+RISE in Chapter 3. We explain how we use cost/gain analysis to find the 
+performance upper bound for single term queries in Chapter 4. 
+In Chapter 5, we investigate the problem of contextual suggestion and 
+present our approaches. We then discuss future work in Chapter 6. 
+Finally, we summarize the contributions of the thesis on Chapter 7.
