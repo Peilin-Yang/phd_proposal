@@ -84,13 +84,41 @@ as the performance references of the selected models.
 
 \section{Boundary Theory of Bag-of-Terms Models}
 Classic IR ranking models \cite{Robertson96okapiat3,Singhal:1996:PDL:243199.243206,Zhai:2004:SSM:984321.984322,Amati:2002:PMI:582415.582416,Fang:2005:EAA:1076034.1076116,Lv:2011:LTF:2063576.2063584,He:2005:SDP:1076034.1076114} 
-are mainly based on bag-of-terms 
-document representation assumption and they mainly consist of statistics 
-such as Term Frequency (TF), Inverted Document Frequency (IDF), 
-Document Length Normalization (DLN) and other collection statistics \cite{Fang:2004:FSI:1008992.1009004}. 
+are mainly based on bag-of-terms document representation assumption and 
+they mainly consist of basic signals (statistics) such as Term Frequency (TF), 
+Inverted Document Frequency (IDF), Document Length Normalization (DLN) 
+and other collection statistics \cite{Fang:2004:FSI:1008992.1009004}. 
 For this domain we can view the bag-of-terms assumption and the 
-commonly used statistics as the context of the ranking models. 
+commonly used statistics as the context of the ranking models since they 
+are the theoretical foundation of these retrieval functions. 
+Under this context our question is whether we have reached the performance 
+upper bound for retrieval functions using only basic ranking signals. 
+If so, what is the upper bound performance? If not, how can we do better? 
 
+To find the performance upper bound is quite challenging: although most of 
+the IR ranking models deal with basic signals, how they combine the signals 
+to compute the relevance scores are quite diverse due to different 
+implementations of IR heuristics \cite{Fang:2004:FSI:1008992.1009004}. 
+This kind of variants makes it difficult to generalize the analysis. 
+Moreover, typically there are one or more free parameters in the ranking 
+models which can be tuned via the training collections. 
+These free parameters make the analysis more complicated.
+In our work, we simplify the problem and just focus on single-term queries 
+and study how to estimate the performance bound for retrieval functions 
+utilizing only basic ranking signals. 
+With only one term in a query, many retrieval functions can be greatly 
+simplified. For example, Okapi BM25 and Pivoted normalization functions have 
+different implementations for the IDF part, but this part can be omitted in the 
+functions for single-term queries because it would not affect the ranking of 
+search results. All the simplified functions can then be generalized to a 
+general function form for single-term queries. As a result, the problem of 
+finding the upper bound of retrieval function utilizing basic ranking signals 
+becomes that of finding the optimal performance of the generalized retrieval 
+function. We propose to use cost/gain analysis to solve the problem \cite{export:132652,export:68133,export:81144}. 
+As the estimated performance upper bound of simplified/generalized model is 
+in general better than the existing ranking models, our finding provides the 
+practical foundation of the potentially more effective ranking models for 
+single term queries.
 
 \section{Contextual Suggestion}
 For the third example we choose one of the IR recommendation system which is 
