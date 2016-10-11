@@ -135,15 +135,32 @@ In our work we focus on the second problem assuming the first requirement
 has already been fulfilled. 
 User profiling is the key component to effectively rank candidate places 
 with respect to a user's information need and the question for us is how 
-to effectively model the user profile? We first propose to leverage the 
-category and description information about the places in user's activity 
-history to construct user profiles \cite{udel:treccs2012}. 
+to effectively model the user profile? 
+We first propose to leverage the category and description information about 
+the places in user's activity history to construct user profiles \cite{udel:treccs2012}. 
 The advantage of such approach is the ease of computation and the satisfactory 
 results \cite{adriel:overview}. 
-We argue that only using category 
-or description to build a user profile is not sufficient: category of places 
-is too general to capture a user's underlying needs; while the text 
-description of a place is too specific to be generalized to other places.
+We further find that using category or description to build a user profile 
+is not enough: category of places is too general to capture a user's 
+underlying needs; while the text description of a place is too specific to 
+be generalized to other places. In another study we leverage opinion, 
+i.e. opinion ratings and the associated text reviews, to construct an 
+opinionated user profile. By doing like this we aim to explain 
+``why the user likes or dislikes thesuggestion'' instead of simply recording 
+``what places the user liked or dislike'' in the search history. 
+The problem of this approach is that on-line opinions are notoriously skewed 
+as only very small number of people post their opinions. 
+To address this data sparsity challenge we propose to also include the 
+opinions from similar users as the current user to construct the profile of 
+current user. The assumption here is that users with similar ratings have 
+the similar reasons of giving the rating. By modeling the candidate places 
+in the similar fashion the similarity between user profile and candidates 
+profile is used to rank the candidates. We tried different representations 
+of the text reviews when modeling the profiles. We further apply 
+Learning-to-Rank (LTR) method to the similarity scores for the ranking method. 
+Experiment results on TREC collections and a self-crawled Yelp collection 
+validate the effectiveness of our method.
+
 
 Previous studies in IR rarely separated the context apart from other 
 components of IR research problem. However, we argue that the context of 
