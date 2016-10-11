@@ -121,12 +121,25 @@ practical foundation of the potentially more effective ranking models for
 single term queries.
 
 \section{Contextual Suggestion}
-For the third example we choose one of the IR recommendation system which is 
-called contextual suggestion. For contextual suggestion the problem is to 
-recommend interesting venues to the users based on contextual information 
-such as geographic location, temporal information and user's activity history. 
+The task of contextual suggestion is to recommend interesting venues to the 
+users based on contextual information such as geographic location, 
+temporal information and user's activity history. 
 Context again, as the name of the problem shows, highlights this direction 
 of research effort. 
+
+There are two necessary steps to perform the location-based contextual 
+suggestion: 1) identify a set of candidates that satisfy the contextual 
+requirements, e.g., places of interest that are close to a target place; 
+(2)rank the candidates with respect to the user interest. Here we assume that 
+the candidates from the first step are given, and we focus on developing 
+effective solution for the second step.User profiling is essential to 
+effectively rank candidate places with respect to a user's information need. 
+Previous studies explored the category and description information about 
+places to construct user profiles [46]. We argue that only using category 
+or description to build a user profile is not sufficient: category of places 
+is too general to capture a user's underlying needs; while the text 
+description of a place is too specific to be generalized to other places.
+
 Previous studies in IR rarely separated the context apart from other 
 components of IR research problem. However, we argue that the context of 
 different IR systems or components should be carefully treated and extensively 
