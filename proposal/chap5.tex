@@ -2,4 +2,271 @@
 % This is Chapter 5 file (chap5.tex)
 %
 \chapter{Contextual Suggestion}
+The increasing use of mobile devices enables an information retrieval (IR) 
+system to capitalize on various types of contexts 
+(e.g., temporal and geographical information) about its users. 
+Combined with the user preference history recorded in the system, 
+a better understanding of users' information need can be achieved and 
+it thus leads to improved user satisfaction. More importantly, such a 
+system could {\em proactively} recommend suggestions based on the contexts.
+
+User profiling is essential in contextual suggestion. However, given most 
+users' observed behaviors are sparse and their preferences are latent in 
+an IR system, constructing accurate user profiles is generally difficult. 
+In our work, we focus on location-based contextual suggestion and propose 
+two approaches to construct user profiles. 
+
+The first approach uses the categories and/or descriptions from 
+users' activities history to build user profile. The rationale here is 
+that users are at a better chance to favor the places that are similar 
+to what she liked before in terms of the category/description of the places. 
+In reality, one user would typically have several positively rated and also 
+several negatively rated suggestions in the past. We compute the similarity 
+of category/description between each candidate suggestion and all 
+places in the user's activity history and combine the averages of 
+both positive and negative scores. 
+Experiment results show pretty decent performance of using this method. 
+
+The second approach leverages the users' opinions to form the user profiles. 
+By assuming users would like or dislike a place with similar reasons, 
+we construct the opinion-based user profile in a collaborative way: 
+opinions from the other users are leveraged to estimate a profile for 
+the target user. Candidate suggestions are represented in the same fashion 
+and ranked based on their similarities with respect to the user profiles.
+Moreover, we also develop a novel summary generation method that utilizes 
+the opinion-based user profiles to generate personalized and high-quality 
+summaries for the suggestions. 
+Experiments conducted over three standard TREC Contextual suggestion 
+collections and a Yelp data set show the advantage of this approach and 
+the system developed based on the proposed methods have been ranked as 
+top 1 in both TREC 2013 and 2014 Contextual Suggestion tracks.
+
+\section{Introduction}
+
+The increasing availability of internet access on
+mobile devices, such as smart phones and tablets,
+has made mobile search a new focus of information retrieval (IR) research community.
+The contextual information such as geographical and temporal 
+information that is available in mobile search environment provides 
+unique opportunities for IR systems 
+to better understand its users. Moreover, a user's preference history 
+collected in a mobile search system can be incorporated with such 
+contextual information to better understand the user's informational need. 
+Ideally, a mobile search system should thus {\em proactively} generate 
+suggestions for various user information needs.  
+For example, it would be useful to automatically send recommendations about 
+the Beatles museum to a music fan who travels to Liverpool. In addition to 
+returning a list of suggestions to the user, it would also be useful 
+to provide a short yet \textit{informative summary} for each suggestion so that 
+the user can easily decide whether the recommended suggestion is interesting 
+before accepting it. This problem is referred to as {\em contextual suggestion}, 
+and has been identified as one of the IR challenges (i.e,. ``finding what you 
+need with zero query terms'') in the SWIRL 2012 workshop \cite{allan:2012}.
+
+
+\section{Problem Formulation} 
+\label{sec:chap5prob}
+
+The problem of contextual suggestion can be formalized 
+as follows. Given a user's contexts (e.g., location
+and time) and the her/his preferences on a few example
+suggestions, the goal is to retrieve candidate 
+suggestions that can satisfy the user's information 
+need based on both the context and preferences. 
+For each returned candidate suggestion, a short description 
+may also be returned so that the user could decide whether 
+the suggestion is interesting without going to its website.
+For example, assume that a user liked ``Magic Kingdom Park'' 
+and ``Animal Kingdom'', but disliked ``Kennedy Space Center''. 
+If the user is visiting Philadelphia on a Saturday, the system 
+is expected to return a list of suggestions such as ``Sesame Palace'' 
+together with a short summary of each suggestion, 
+e.g., ``Sesame Place is a theme park in Langhorne, Pennsylvania based on 
+the Sesame Street television program. It includes a variety of rides, shows, 
+and water attractions suited to very young children.''
+
+Since our paper focuses on user modeling, we assume 
+that we have filtered out the suggestions that do not meet the context requirement 
+and the remaining suggestions
+only need to be ranked based on the relevance to 
+user preferences. Note that the filtering process 
+based on contexts can be achieved by simply removing 
+the suggestions that do not satisfy the contextual 
+requirements, such as the ones that are either 
+too far away from the current location or those 
+that are currently closed. 
+
+The remaining problem is essentially a ranking 
+problem, where candidate suggestions need to 
+be ranked based on how relevant the suggestions
+are with respect to a user's interest. 
+Formally, let $U$ denote a user and $CS$ denote a 
+candidate suggestion, we need to estimate 
+$S(U,CS)$, i.e., the relevance score between 
+the user and the suggestion. 
+
+It is clear that the estimation of the relevance 
+score is related to how to represent $U$ 
+and $CS$ based on the available information. 
+Let us first look at what kind of 
+information we can gather for $U$ and $CS$.  
+For each user $U$, 
+we know the user's preferences (i.e., ratings) for a list of 
+example suggestions. We denote an example suggestion $ES$ 
+and its rating given by user $U$ as $R(U,ES)$.  For a 
+suggestion (either $CS$ or $ES$), we assume that the 
+following information about the suggestion is available: 
+the text description such as title and category and online 
+opinions about this suggestion. 
+Note all the information can be collected from online location 
+services such as Yelp and Tripadvisor. 
+
+
+\section{Method with Category and Description}
+
+\subsection{Gathering Candidate Suggestions}
+To collect candidate suggestions, we crawl the information 
+from multiple online sources such as Yelp and Foursquqre 
+based on the geographical information from the 50 contexts. 
+The collected candidate suggestions have different fields
+such as categories, web sites, business hours, etc. 
+Moreover, we also crawl the web site for each candidate 
+suggestion. 
+
+\subsection{Ranking based on User Profiles}
+
+We now describe how to rank candidate suggestions based on 
+user profiles. The profile of each user consists of the user's 
+preferences for 49 example locations. The locations that a 
+user likes are referred to as ``positive examples'', and those
+disliked by the user are referred to as ``negative examples''. 
+Intuitively, the relevance score of a candidate suggestion should 
+be higher when it is similar to positive examples while different
+from the negative examples. 
+
+Formally, we denote $U$ as a user and $C$ as a candidate suggestion. 
+Moreover, let $P(U)$ denote positive examples, i.e., a set of places 
+that the user likes, and $N(U)$ denote negative examples, i.e., a set 
+of places that the user dislikes. The relevance score of $C$ with 
+respect to $U$ can then be computed as follows:  
+\begin{eqnarray}
+    S(U,C) &=& \varphi \times S_P(P(U),C) + (1-\varphi) \times S_N(N(U),C) \\
+&=& \varphi \times \frac{\sum_{p \in P(U)}{SIM(p,C)}}{|P(U)|} 
++ (1-\varphi) \times \frac{\sum_{p \in N(U)}{SIM(n,C)}}{|N(U)|}, 
+\label{eq:13}
+\end{eqnarray}
+
+where $\varphi \in [0,1]$ and it regularize the weights between the 
+positive and negative examples. When $\varphi=1$, the highly ranked 
+suggestions would be those similar to the locations that the user likes. 
+When $\varphi=0$, the highly ranked suggestions would be those 
+different from the locations that the user dislikes. 
+$S_P(P(U),C)$ measures the similarity between the positive user profile
+and the candidate suggestion, and we assume that it can be computed 
+by averaging the similarity scores between each positive example and 
+the candidate suggestion. $|P(U)|$ corresponds to the number of 
+positive examples in the user profile. 
+
+Thus, it is clear that the problem of computing the relevance score 
+of a candidate suggestion with respect a user can be boiled down 
+to the problem of computing the relevance score between a candidate
+suggestion and a place mentioned in the user profile, i.e., $SIM(e,C)$, 
+where $e$ is an example from the user profile. We explore the following 
+two types of information to compute $SIM(e,C)$: (1) the category 
+of a place; and (2) the description of a place. 
+
+
+\subsubsection{Category-based similarity:}
+Category is a very important factor that may greatly
+impact user preferences. The categories of the crawled 
+suggestions are often hierarchical. Here is an example 
+category, i.e.,  
+\textit{[History Museum$\to$\\Museum$\to$Arts].}
+The categories becomes more general from the left to the right. 
+In this example, \textit{Arts} is the most general category
+while \textit{History Museum} is the most specific category.
+Note that we represent the hierarchical categories
+as a set of categories in this paper. 
+
+
+\begin{table}[t]
+\begin{center}
+\caption{\textbf{Examples of Categories in Example Suggestions}}\label{tb:category_example}
+\begin{tabular}{ | l | p{5cm} | p{4cm} |}
+\hline
+\textbf{NAME} & \textbf{Yelp Categories} & \textbf{FourSquare Categories}\\ 
+\hline
+\hline
+HoSu Bistro & SushiRestaurant$\to$Restaurants;
+             KoreanRestaurant$\to$Restaurants;
+            JapaneseRestaurant$\to$Restaurants
+            & SushiRestaurant$\to$Food \\ 
+\hline
+The Rex & JazzBlues$\to$MusicVenues$\to$Arts 
+        & JazzClub $\to$ MusicVenue $\to$ ArtsEntertainment\\ 
+\hline
+St. Lawrence Market & Grocery$\to$Shopping;
+                    FarmersMarket$\to$Shopping 
+        & FarmersMarket $\to$ FoodDrinkShop $\to$ ShopService\\ 
+\hline
+... & ... & ...\\
+\hline
+\end{tabular}
+\vspace{-5mm}
+\end{center}
+\end{table}
+
+We can compute $SIM(e,C)$ based on the category similarities between 
+$e$ and $C$ as follows: 
+\begin{equation}
+SIM_{\cal C}(e,C) = \frac{ \sum_{c_i \in {\cal C}(e)} \sum_{c_j \in {\cal C}(C)} \frac{|Intersection(c_i,c_j)|}{max(|c_i|,|c_j|)}}{|{\cal C}(e)| \times |{\cal C}(C)|}, 
+\label{eq:simc}
+\end{equation}
+
+where
+${\cal C}(e)$ denotes the set of categories of location $e$ and
+$|Intersection(c_i,c_j)|$ is the number of common categories 
+between $c_i$ and $c_j$. 
+Recall that we crawled the candidate suggestions from two online 
+sources. Table~\ref{tb:category_example} shows example categories 
+from both sources. Thus, we combine the similarity scores computed 
+based on the categories from them as follows: 
+\begin{equation}
+    SIM_{{\cal C}'}(e,C) = \phi \times SIM_C^{Yelp}(e,C) + (1-\phi) \times SIM_C^{FourSquare}(e,C). 
+\label{eq:3}
+\end{equation} 
+In our experiments, we set $\phi$ as 0.5 
+which means the importance of category score of Yelp and 
+FourSquare are the same.
+
+
+\subsubsection{Description-based similarity:}
+In example suggestions, each suggestion has its unique 
+description which typically is at a short length. We want 
+to learn how the descriptions can affect people's decision 
+on different places. By comparing the descriptions of training 
+suggestions with textual web sites of testing suggestions we 
+may find some interesting connections. We use textual web sites 
+of testing suggestions because we believe that textual web sites 
+are more reliable than descriptions especially when we rank 
+candidate suggestions. The similarity used function is 
+the F2EXP ranking function \cite{Fang:2005:EAA:1076034.1076116}. 
+Thus, we compute the similarity scores as follows: 
+$SIM_{\cal D}(e,C) = F2EXP(DES(e),DES(C)),$
+where $DES(e)$ is a description of the example place $e$. 
+
+
+\subsection{Ranking the candidates based on the contexts}
+There are two types of context: geographical and temporal information. 
+All of the candidate suggestions crawled in the first step are related
+to the geographical requirement because they are retrieved based on it. 
+To make sure the suggestions satisfying the temporal requirement, 
+we collected the business hours from Yelp, and then assign the business
+hours for each cateogry  
+if the majority suggestions in that category follow the same 
+business hour. Candidate suggestions that do not meet the temporal 
+requirement are then removed from the final ranking list. 
+
+
+
 
