@@ -18,34 +18,81 @@ industrial counterpart search engine, is one of the most evolving fields and
 has drawn extensive attention in recent years.
 The primary goal of IR research is to improve the effectiveness or the 
 efficiency or both of the textual retrieval system. 
-There are many related works dedicated to this line of research already. 
-For example, \textbf{Citation Here!!!!!} \cite{Singhal:1996:PDL:243199.243206}. 
-However, there is few literatures dedicated to elaborate on the context 
-of these research efforts.
+There are many related works dedicated to this line of research already
+\cite{Robertson96okapiat3,Singhal:1996:PDL:243199.243206,Zhai:2004:SSM:984321.984322,Fang:2005:EAA:1076034.1076116,Wu:2013:IAE:2484028.2484051,Liu2015}. 
+Like everything in the world the various IR researches have their own 
+context. The context could be the experiment settings. It can also be the 
+assumptions on which the ranking model relies. 
+
 
 The word ``\textit{Context}'' is originally defined as 
 ``the set of circumstances or facts that surround a particular event, situation, etc.'' 
 In IR research the context always plays an crucial role and it is the 
 fundamental basis of some very important IR research efforts. 
-Without clearly defining of the context of each line of research we might get  
-dim results and this is not a good sign for the whole IR community. 
-Here we show three domains that extensively studied in this dissertation. 
+In our work, we pick three distinct domains to show the existence and 
+the impact of the context.
 
-For example, classic IR ranking models are mainly based on 
-bag-of-terms document representation assumption and they mainly 
-consist of statistics such as Term Frequency (TF), 
-Inverted Document Frequency (IDF), 
-Document Length Normalization (DLN) and other collection statistics. 
-Here the bag-of-terms assumption 
-and the commonly used statistics are the context of the ranking models. 
-Another example comes from the IR evaluation. 
-For evaluation of IR system the ideal case is we use a unified testing 
-environment to assess the ranking models. 
-The evaluation process is then purely based on the algorithms since the 
-unified testing environment takes care of the possible processing stages, 
-e.g. prepare the data and standardize the results. 
-Here the ideal unified testing environment is the context of the evaluation 
-process. 
+\section{Unified IR Evaluation System}
+The first domain is related to the evaluation of IR system. 
+There are many aspects that an IR system can be evaluated. 
+In our work we focus on evaluating the effectiveness of the system. 
+Many different techniques can be applied to address the effectiveness of 
+the system. For example, Natural Language Processing (NLP) techniques \cite{Voorhees:1999:NLP:645857.669935,Mihalcea:2011:GNL:1984806}. 
+Topic Modeling \cite{Blei:2003:LDA:944919.944937,Hofmann:1999:PLS:312624.312649}.
+But most of the previous works target on the simple yet effective ranking 
+models which usually applied to the document index.
+For a typical IR evaluation system the ideal case is to have a unified 
+testing environment which is responsible for everything related 
+to the evaluation process except the ranking model part. That said, everything 
+including pre-processing and indexing the documents, ranking the documents, 
+evaluating the results, the choice of evaluation metrics and interpretation of 
+the performance should under the same setting if one's purpose is purely 
+compare the effectiveness of different ranking models.
+Here the unified testing environment can be regarded as the context of 
+the evaluation process. 
+
+The context here is the basis of any kind of comparison between ranking models. 
+Without the unified testing environment people cannot make sound claim about 
+their proposed models. Unfortunately, there is no such environment for the 
+IR community. People continuously report different performances on the same 
+baseline model \cite{Yang:2016:RSI:2970398.2970415} and this casts doubt on 
+the real effectiveness of the proposed models.
+
+In our work, two systems, namely VIRLab \cite{Fang:2014:VWV:2600428.2611178} 
+and RISE \cite{Yang:2016:RSI:2970398.2970415} are proposed to specifically 
+address the problem. The uniqueness and the advantage of these two system is 
+that they offer centralized and controlled IR evaluation systems which 
+facilitate the fair comparison of retrieval models. The systems are the 
+instantiation and expansion of Privacy Preserving Evaluation (PPE)\cite{Fang:2014:VWV:2600428.2611178} 
+and Evaluation as a Service (EaaS)\cite{rao:ecir:2015}. 
+With the help of these systems (especially RISE) we are able to conduct a 
+comprehensive reproducibility study for information retrieval models. 
+In particular, we implement and evaluate more than 20 basic retrieval 
+functions over 16 standard TREC collections. Experimental results allow us to 
+make a few interesting observations. We first compare the evaluation results 
+with those reported in the original papers, and find that the performance 
+differences between the reproduced results and the original ones are small 
+for majority of the retrieval functions. Among all the implemented functions, 
+only one of them consistently generates worse performance than the one 
+reported in the original paper. Moreover, we report the retrieval 
+performance of all the implemented retrieval functions over all the 16 
+TREC collections including recently released ClueWeb sets. 
+To the best of our knowledge, this is the first time of reporting such a 
+large scale comparison of IR retrieval models. Such a comparison can be used 
+as the performance references of the selected models.
+
+
+\section{Boundary Theory of Bag-of-Terms Models}
+Classic IR ranking models \cite{Robertson96okapiat3,Singhal:1996:PDL:243199.243206,Zhai:2004:SSM:984321.984322,Amati:2002:PMI:582415.582416,Fang:2005:EAA:1076034.1076116,Lv:2011:LTF:2063576.2063584,He:2005:SDP:1076034.1076114} 
+are mainly based on bag-of-terms 
+document representation assumption and they mainly consist of statistics 
+such as Term Frequency (TF), Inverted Document Frequency (IDF), 
+Document Length Normalization (DLN) and other collection statistics \cite{Fang:2004:FSI:1008992.1009004}. 
+For this domain we can view the bag-of-terms assumption and the 
+commonly used statistics as the context of the ranking models. 
+
+
+\section{Contextual Suggestion}
 For the third example we choose one of the IR recommendation system which is 
 called contextual suggestion. For contextual suggestion the problem is to 
 recommend interesting venues to the users based on contextual information 
@@ -63,6 +110,20 @@ easily compared. Moreover, there are many other web applications which
 are highly related to the IR system. One of such domain is recommendation 
 system where researchers tried their best to incorporate IR techniques 
 with this area hoping to satisfy users different needs.
+
+Apparently, the context of 
+every line of research effort in IR should be standardized so that the 
+full picture could be seen clearly. 
+However, there is few literatures dedicated to elaborate on the context 
+of these research efforts.
+
+
+
+Without clearly defining of the context of each line of research we might get  
+dim results and this is not a good sign for the whole IR community. 
+Here we show three domains that extensively studied in this dissertation. 
+
+
 
 
 The primary goal of IR research is to effectively address user's 
