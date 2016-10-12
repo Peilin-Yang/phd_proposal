@@ -4,70 +4,69 @@
 Information Retrieval (IR) is one of the most evolving research fields 
 and has drawn extensive attention in recent years. 
 Typically, there are different types of IR systems targeting to meet 
-different users' information needs. 
-For IR researchers they want an IR system which is more 
-fundamental, transparent and touchable. Such system could offer the researchers 
-the ability to easily modify, test and iterate their hypothesis. 
-On the other hand, an IR system could also be mainly for end users. 
-Users of the system do not necessarily know the details of how to design, 
-how to implement the ranking algorithm of the system -- they just need to know 
-how to use the system to meet their information needs.
+different users' information needs. We are more interested in two kinds of 
+IR systems: (1) the system for IR researchers who are interested in 
+understanding the IR ranking models, (2) the contextual suggestion system 
+mainly for end users.
+In order to make better aforementioned IR systems that are satisfied 
+for both researchers and end users, in our work we explorer the impact of 
+context in two specific long-term IR related tasks -- ranking model 
+performance upper bound analysis using unified evaluation system and contextual suggestion.
 
-In order to make better IR systems that are satisfied for both researchers 
-and end users, in our work we explorer the impact of context in two specific 
-long-term IR related tasks -- ranking model performance upper bound analysis 
-using unified evaluation system and contextual suggestion.
- 
-Previously, the typical work-flow of proposing a new IR ranking model is to 
-implement the algorithm using the most convenient tool (e.g. Indri) of the 
-researcher's choice. 
-The ranking model is then evaluated against standard data collections and 
-the performances are compared with commonly used baselines (e.g. BM25 \cite{Robertson96okapiat3}) 
-and the advantage of the proposed model is presented. 
-The problem of such methodology is that different tools and experimental 
-settings may result in different results for the same model \cite{Yang:2016:RSI:2970398.2970415} 
-and this is a long standing problem of IR community for over 20 years \cite{Armstrong:2009:IDA:1645953.1646031}. The fact casts doubts on the real 
-effectiveness of the proposed ranking models and it is essential for the 
-IR community to have a unified evaluation system so that ranking models 
-can be compared without considering the details -- usually other components 
-of an IR system, e.g. preprocessing of documents, choice of evaluation metrics. 
+A long standing problem of IR community is that newly proposed ranking models 
+are implemented and evaluated using various systems of researchers' choices 
+and such choices lead to the fact that different researchers reported 
+different results for the same baseline model \cite{Yang:2016:RSI:2970398.2970415}. The context -- IR systems used by researchers, 
+is apparently the cause of such problem. This fact casts doubts on the real 
+effectiveness of the proposed ranking models and we argue that it is 
+essential for the IR community to have a unified evaluation system so that 
+ranking models can be compared without considering the details -- usually 
+other components of an IR system, e.g. preprocessing of documents, choice of 
+evaluation metrics. 
 In our work we propose two unified IR evaluation systems to alleviate this problem. 
-VIRLab as our first attempt. It provides an easy-to-use IR evaluation system 
-where user of the system can implement her/his our model without considering 
-too much about the underlying framework.
-A web based Reproducible IR Evaluation System (RISE) is the first ever known 
-system that users of the system can collaborate with each other and thus make 
-the normalization of baseline models much more easier and thus can be trusted 
-by future researchers. A large scale experiment based on RISE serves as the 
-the performance reference of most widely used IR models.
+VIRLab as our first attempt. It provides an web based IR evaluation system 
+where user of the system can implement her/his our model and get it 
+automatically evaluated.
+Another system RISE (Reproducible IR System Evaluation) is proposed later 
+to reflect the other endeavor from us. 
+RISE is the first ever known system that users of the system 
+can collaborate with each other and thus make the normalization of baseline 
+models much more easier and thus can be trusted by future researchers. 
+A large scale reproducibility experiment based on RISE serves as the the 
+performance reference of most widely used IR models.
 
-Another example is the boundary theory of ranking model performance. 
-The context of this line of research is the bag-of-terms representation of 
-the document assumption and the widely used statistics, e.g. Term Frequency 
-(TF) and Inverted Document Frequency (IDF) 
-that the ranking model consists of. We first compare the optimal 
-performances of state-of-the-art ranking models and find the optimums 
-are similar for those models even the underlying theories are different. 
-To dig it deeper we use the cost/gain analysis which is commonly used in 
-learning-to-rank (LTR) regime to find the optimum of single term queries for 
-a family of ranking models that share similar strategy of combining key 
-signals. The result shows that although the performances of state-of-the-art 
+Based on the reproducibility experiment results of using RISE we find that 
+the optimum performances of several TREC collections do not improve a lot 
+for over 20 years if bag-of-terms ranking model is used. 
+This introduces another interesting question: does it exist the performance 
+upper bound for bag-of-terms models? To answer this question we extensively 
+investigate the context -- the bag-of-terms document representation 
+assumption and the statistics like term frequency and inverted document 
+frequency the models usually play with.
+We first find that for single term queries several ranking models can be 
+transformed to a simplified model. 
+We then apply the cost/gain analysis which is commonly used in 
+learning-to-rank (LTR) domain to find the optimum of single term queries 
+for this simplified model.
+The result shows that although the performances of state-of-the-art 
 ranking models are quit close to the practical optimum there is still some 
 room for improvement.
 
-The third domain is to investigate the usage of opinion to contextual 
-suggestion. It is commonly agreed that how to model user profile is the key 
-to the solution. We first model the user profile using the venue's category 
-and description of user activity history. We further improve the 
+For contextual suggestion system it is commonly agreed that how to model user 
+profile is the key to the solution. We argue that user's preference which is 
+usually modeled as a static or long term factor should also be considered as 
+part of the context of this problem. 
+Our first approach is to model the user profile using the venue's category 
+and description from user's activity history. We further improve the 
 method by leveraging the opinions from user's activity history to model the 
-user profile. Such methodology naturally utilizes the rich text associated 
-with the users which naturally makes the problem as a retrieval problem. 
+user profile. Such methodology utilizes the rich text associated 
+with the users which naturally fits the problem into IR domain. 
 By modeling the candidate suggestions in the similar fashion, 
-the similarities between the candidates and the user profile are used to score 
-the candidates. Experiments on TREC collections and a 
-Yelp data collection reveals the advantage of our method.
+the similarities between the candidates and the user profile are used to 
+score the candidates. Experiments on TREC collections and a 
+Yelp data collection confirm the advantage of our method.
 
-For the future work, there are mainly two directions we would like to explore more deeper. 
+For the future work, there are mainly two directions we would like to explore more. 
 The first one is to quantify the impact of the context of unified 
 IR evaluation system. There is no previous work on how much difference does 
 the usage of different retrieval tools bring.
