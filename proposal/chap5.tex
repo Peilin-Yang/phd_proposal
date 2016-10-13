@@ -1248,3 +1248,42 @@ Review & 0.69 & 0.77 \\ \hline
 
 
 
+\section{Conclusions} 
+\label{sec:con} 
+
+%* Future work:   personalized local search \cite{Lv:12}. 
+%* consider distance 
+%* evaluate with TREC problem set up 
+
+One of the important challenging in mobile search is
+to return satisfying results based on not only 
+user preference history but also contextual information. 
+Our work focuses on user profiling for contextual suggestion. 
+In particular, we propose to use opinions for both candidate 
+suggestion ranking as well as suggestion summary generation. 
+
+For candidate suggestion ranking task, category, description 
+and opinions are used to build the enriched user profile and 
+the candidate suggestion profile. 
+For opinion based user profile several opinion representations 
+including the full review text and part of the review text have 
+been explored to model the user profile. 
+Various ranking methods including linear interpolation and 
+learning to rank have been investigated to compute the ranking scores. 
+The effectiveness of our methods have been tested on standard TREC 
+collections and a self-crawled Yelp collection for both P@5 and ERR@20. 
+The more detailed analysis showed that using NR as the 
+representation of the opinion in general performs better than other 
+opinion representations. 
+Although there is no obvious difference between the optimal performance 
+of linear interpolation and learning to rank, MART performs better than 
+other learning to rank methods - Lambda MART and Linear Regression.
+We further did more in-depth analysis on how size of the user 
+profile can affect the performance. The results showed that using as 
+few as 10\% of the user preferences to build the user profile still 
+leads to promising performance.
+
+Furthermore, we also propose to construct a structured summary 
+by leveraging information from multiple resources. Experiment results 
+show that the proposed method is more effective than the baseline method, 
+and some components in the summary are more useful than the others. 

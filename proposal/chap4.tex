@@ -3,3 +3,27 @@
 %
 \chapter{Boundary Theory of IR Ranking Models}
 
+Various information retrieval models have been studied for decades. 
+Most traditional retrieval models are based on bag-of-term 
+representations, and they model the relevance based on various 
+collection statistics, e.g. Term Frequency (TF), 
+Inverted Document Frequency (IDF), Document Length (DL). 
+Bag-of-term document representation and the statistics could be 
+treated as the context of such ranking models.
+Despite these efforts, it seems that the performance of 
+``bag-of-term'' based retrieval functions has reached plateau, 
+and it becomes increasingly difficult to further improve the retrieval 
+performance. Thus, one important research question is whether 
+we can provide any theoretical justifications on the empirical 
+performance bound of basic retrieval functions. 
+
+In our work, we start with single term queries, and aim to
+estimate the performance bound of retrieval functions that
+leverage only basic ranking signals such as document term
+frequency, inverse document frequency and document length
+normalization. Specifically, we demonstrate that, when only
+single-term queries are considered, there is a general func-
+tion that can cover many basic retrieval functions. We then
+propose to estimate the upper bound performance of this
+function by applying a cost/gain analysis to search for the
+optimal value of the function.
