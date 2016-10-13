@@ -147,9 +147,9 @@ and ${\cal U}_{-}(U)$ denote negative user profile, i.e., a set
 of places that the user dislikes. The relevance score of $CS$ with 
 respect to $U$ can then be computed as follows:  
 \begin{eqnarray}
-    S(U,CS) &=& \varphi \times SIM({\cal U}_{+}(U),CS) + (1-\varphi) \times SIM({\cal U}_{-}(U),CS) \\
-&=& \varphi \times \frac{\sum_{e \in {\cal U}_{+}(U)}{SIM(e,CS)}}{|{\cal U}_{+}(U)|} 
-+ (1-\varphi) \times \frac{\sum_{e \in {\cal U}_{+}(U)}{SIM(e,CS)}}{|{\cal U}_{+}(U)|} 
+    \mathrm{S(U,CS)} &=& \varphi \times \mathrm{SIM}({\cal U}_{+}(U),CS) + (1-\varphi) \times \mathrm{SIM}({\cal U}_{-}(U),CS) \\
+&=& \varphi \times \frac{\sum_{e \in {\cal U}_{+}(U)}{\mathrm{SIM}(e,CS)}}{|{\cal U}_{+}(U)|} 
++ (1-\varphi) \times \frac{\sum_{e \in {\cal U}_{+}(U)}{\mathrm{SIM}(e,CS)}}{|{\cal U}_{+}(U)|} 
 \label{chap5_eq1}
 \end{eqnarray}
 where $\varphi \in [0,1]$ regularizes the weight between the 
@@ -157,7 +157,7 @@ positive and negative similarities. When $\varphi=1$, the highly ranked
 suggestions would be those similar to the suggestions that the user likes. 
 When $\varphi=0$, the highly ranked suggestions would be those 
 different from the suggestions that the user dislikes. 
-$SIM({\cal U}_{+}(U),CS)$ measures the similarity between the 
+$\mathrm{SIM}({\cal U}_{+}(U),CS)$ measures the similarity between the 
 positive user profile and the candidate suggestion, 
 and we assume that it can be computed 
 by averaging the similarity scores between each positive example and 
@@ -168,9 +168,9 @@ corresponding symbols for negative one.
 Thus, it is clear that the problem of computing the relevance score 
 of a candidate suggestion with respect to a user can be boiled down 
 to the problem of computing the relevance score between a candidate
-suggestion and a place mentioned in the user profile, i.e., $SIM(e,CS)$, 
+suggestion and a place mentioned in the user profile, i.e., $\mathrm{SIM}(e,CS)$, 
 where $e$ is an example from the user profile. We explore the following 
-two types of information to compute $SIM(e,CS)$: (1) the category 
+two types of information to compute $\mathrm{SIM}(e,CS)$: (1) the category 
 of a place; and (2) the description of a place. 
 
 
@@ -211,10 +211,10 @@ St. Lawrence Market & Grocery$\to$Shopping;
 \end{tabular}
 \end{center}
 \end{table}
-We can compute $SIM(e,CS)$ based on the category similarities between 
+We can compute $\mathrm{SIM}(e,CS)$ based on the category similarities between 
 $e$ and $CS$ as follows: 
 \begin{equation}
-SIM_{\cal C}(e,CS) = \frac{ \sum_{c_i \in {\cal C}(e)} \sum_{c_j \in {\cal C}(C)} \frac{|Intersection(c_i,c_j)|}{max(|c_i|,|c_j|)}}{|{\cal C}(e)| \times |{\cal C}(C)|} 
+\mathrm{SIM}_{\cal C}(e,CS) = \frac{ \sum_{c_i \in {\cal C}(e)} \sum_{c_j \in {\cal C}(C)} \frac{|Intersection(c_i,c_j)|}{max(|c_i|,|c_j|)}}{|{\cal C}(e)| \times |{\cal C}(C)|} 
 \label{chap5_eq2}
 \end{equation}
 where
@@ -238,15 +238,15 @@ candidate suggestions. The similarity used function is
 the F2EXP ranking function \cite{Fang:2005:EAA:1076034.1076116} since it has been shown to be effective 
 for long queries \cite{Fang:2005:EAA:1076034.1076116}. So, we have 
 \begin{equation}
-F2EXP(a,b)=\sum_{t\in{a\cap b}}{\frac{c(t,b)}{c(t,b)+0.5+\frac{0.5\cdot |b|}{avdl}\cdot (\frac{N+1}{df(t))})^{0.35}}}
+\mathrm{F2EXP}(a,b)=\sum_{t\in{a\cap b}}{\frac{c(t,b)}{c(t,b)+0.5+\frac{0.5\cdot |b|}{avdl}\cdot (\frac{N+1}{df(t))})^{0.35}}}
 \label{chap5_eq3}
 \end{equation}
 Thus, we compute the similarity scores as follows: 
 \begin{equation}
-SIM_{\cal D}(e,CS) = F2EXP(DES(e),DES(CS))
+\mathrm{SIM}_{\cal D}(e,CS) = \mathrm{F2EXP}(DES(e),DES(CS))
 \label{chap5_eq4}
 \end{equation}
-where $DES(e)$ is a description of the example place $e$. 
+where $\mathrm{DES}(e)$ is a description of the example place $e$. 
 
 
 \section{Opinion-based User Profile Modeling}  \label{sec:user} 
@@ -501,21 +501,21 @@ suggestions with the properties that the user likes or those without
 the properties that the user dislikes. This means that the relevance 
 score $S(U,CS)$ should be positively correlated with the similarity 
 between two positive profiles and two negative profiles, i.e., 
-$SIM({\cal U}_{+}(U),{REP}_{+}(CS))$ 
-and $SIM({\cal U}_{-}(U),{REP}_{-}(CS))$. Similarly, a user would not 
+$\mathrm{SIM}({\cal U}_{+}(U),{REP}_{+}(CS))$ 
+and $\mathrm{SIM}({\cal U}_{-}(U),{REP}_{-}(CS))$. Similarly, a user would not 
 like suggestions with the properties that the user dislikes or 
 suggestions without the properties that the user likes, which means 
 $S(U,CS)$ should be negatively correlated with the similarity between 
-positive and negative profiles, i.e., $SIM({\cal U}_{+}(U),{REP}_{-}(CS))$ 
-and $SIM({\cal U}_{-}(U),{REP}_{+}(CS))$. 
+positive and negative profiles, i.e., $\mathrm{SIM}({\cal U}_{+}(U),{REP}_{-}(CS))$ 
+and $\mathrm{SIM}({\cal U}_{-}(U),{REP}_{+}(CS))$. 
 
 
 Following the above intuitions, we can estimate the similarity between a user and a candidate suggestion as follows: 
 
 \begin{equation}
 \begin{split}
-S&(U,CS) = \alpha \times SIM({\cal U}_{+}(U),{REP}_{+}(CS)) - \beta \times SIM({\cal U}_{+}(U),{REP}_{-}(CS)) \\
-& - \gamma \times SIM({\cal U}_{-}(U),{REP}_{+}(CS)) + \eta \times SIM({\cal U}_{-}(U),{REP}_{-}(CS))
+S&(U,CS) = \alpha \times \mathrm{SIM}({\cal U}_{+}(U),{REP}_{+}(CS)) - \beta \times \mathrm{SIM}({\cal U}_{+}(U),{REP}_{-}(CS)) \\
+& - \gamma \times \mathrm{SIM}({\cal U}_{-}(U),{REP}_{+}(CS)) + \eta \times \mathrm{SIM}({\cal U}_{-}(U),{REP}_{-}(CS))
 \end{split}
 \label{eq:1}
 \end{equation}
@@ -528,7 +528,7 @@ we used an axiomatic retrieval function F2EXP
 \cite{Fang:2005:EAA:1076034.1076116} since it has been shown to be effective 
 for long queries \cite{Fang:2005:EAA:1076034.1076116}. So, we have 
 \begin{equation}
-SIM(a,b)=\sum_{t\in{a\cap b}}{\frac{c(t,b)}{c(t,b)+0.5+\frac{0.5\cdot |b|}{avdl}\cdot (\frac{N+1}{df(t))})^{0.35}}}
+\mathrm{SIM}(a,b)=\sum_{t\in{a\cap b}}{\frac{c(t,b)}{c(t,b)+0.5+\frac{0.5\cdot |b|}{avdl}\cdot (\frac{N+1}{df(t))})^{0.35}}}
 \label{eq:f2exp}
 \end{equation}
 where
@@ -560,10 +560,10 @@ information retrieval area
 Macdonald:2013:WHL:2559123.2559126}. 
 
 For our task, we can first compute the similarity scores 
-\\$SIM({\cal U}_{+}(U),{REP}_{+}(CS))$, 
-$SIM({\cal U}_{-}(U),{REP}_{-}(CS))$, 
-\\$SIM({\cal U}_{+}(U),{REP}_{-}(CS))$ and 
-$SIM({\cal U}_{-}(U),{REP}_{+}(CS))$ 
+\\$\mathrm{SIM}({\cal U}_{+}(U),{REP}_{+}(CS))$, 
+$\mathrm{SIM}({\cal U}_{-}(U),{REP}_{-}(CS))$, 
+\\$\mathrm{SIM}({\cal U}_{+}(U),{REP}_{-}(CS))$ and 
+$\mathrm{SIM}({\cal U}_{-}(U),{REP}_{+}(CS))$ 
 which is exactly the same as what we do in linear 
 interpolation method (Section \ref{sec:linear_interpolation}).
 After having these similarities at hand, we can use the 

@@ -19,11 +19,495 @@ performance bound of basic retrieval functions.
 
 In our work, we start with single term queries, and aim to
 estimate the performance bound of retrieval functions that
-leverage only basic ranking signals such as document term
-frequency, inverse document frequency and document length
-normalization. Specifically, we demonstrate that, when only
-single-term queries are considered, there is a general func-
-tion that can cover many basic retrieval functions. We then
+leverage only basic ranking signals. Specifically, we demonstrate that, 
+when only single term queries are considered, there is a general 
+function that can cover many basic retrieval functions. We then
 propose to estimate the upper bound performance of this
 function by applying a cost/gain analysis to search for the
 optimal value of the function.
+
+
+\begin{table*}[t]
+\tiny
+\centering
+\caption{Instantiations of the general retrieval form}
+\label{tab:allmodels}
+\begin{tabular}{ ccccccc } \hline
+Retrieval Functions & $g(\cdot)$ & $\alpha$ & $c_1$ & $\gamma$ & $\beta$ & $c_2$ \\\hline \hline
+DIR & 1 & 1 & $\mu\cdot p(t|C)$ & 0 & 1 & $\mu$ \\ \hline
+BM25 \& BM25+ & 1 & $k_1+1$ & 0 & 1 & $\frac{k_1 \cdot b}{avdl}$ & $k_1 \cdot (1-b)$ \\ \hline
+PIV \& PIV+ & $1+ln(1+ln(\cdot))$ & 1 & 0 & 0 & $\frac{s}{avdl}$ & $1-s$ \\ \hline
+F1EXP \& F1LOG & $1+ln(1+ln(\cdot))$ & $avdl+s$ & 0 & 0 & $s$ & $avdl$ \\ \hline
+F2EXP \& F2LOG & 1 & 1 & 0 & 1 & $\frac{s}{avdl}$ & $s$ \\ \hline
+BM3 & 1 & 1 & $\mu \cdot p(t|C)$ & $\mu$ & $k_1$ & $k_1\cdot \mu + \mu^2 \cdot p(t|C)$ \\ \hline
+DIR+ & 1 & $\mu \cdot p(t|C)+\delta$ & $\mu^2\cdot p^2(t|C)+\delta \cdot \mu \cdot p(t|C)$ & 0 & $\mu \cdot p(t|C)$ & $\mu^2 \cdot p(t|C)$ \\ \hline 
+\hline
+\end{tabular}
+\end{table*}
+
+
+\section{Performance Bound Analysis}
+\label{sec:stqa}
+
+\subsection{A General Form of Retrieval Functions for Single-Term Queries}
+
+The implementations of retrieval functions are quite diverse, and it 
+is often difficult to develop a general function form that can cover
+many retrieval functions. However, if we consider only single-term 
+queries (i.e,. those with only one query term), the problem can 
+be greatly simplified. 
+
+Let us start with a specific example. Dirichlet prior function 
+is one of the representative functions derived using language 
+modeling approaches \cite{Zhai:2004:SSM:984321.984322}, and 
+is shown as follows: 
+\begin{equation}
+\label{func:dirichlet}
+f(Q,d)=\sum_{t \in Q}{\mathrm{ln}\Bigg(\frac{c(t, d)+\mu \cdot p(t|C)}{|d|+\mu}\Bigg)}, 
+\end{equation}
+where $c(t,d)$ is the frequency of term $t$ in document $d$, 
+$|d|$ is the document length; $p(t|C)$ is the maximum-likelihood of the term 
+frequency in the collection and $\mu$ is the model parameter.  
+When a query contains only a term $t$, the retrieval function can 
+be simplified to: 
+\begin{equation}
+\label{func:dirsimple}
+f(\{t\},d)=\frac{c(t, d)+\mu \cdot p(t|C)}{|d|+\mu}
+\end{equation}
+
+Note the natural logarithm function in Equation (\ref{func:dirichlet}) 
+is omitted since it is a monotonically increasing function and would not affect the 
+ranking results. Since $p(t|C)$ is a collection-dependent constant, the function 
+can be further simplified as: 
+\begin{equation}
+\label{func:dirsimplef}
+f(t,d) = \frac{c(t, d)+c_1}{|d|+c_2}. 
+\end{equation}
+Similarly, Okapi BM25 \cite{Robertson96okapiat3} can be simplified to: 
+\begin{equation}
+\label{func:bm25simple}
+\begin{split}
+f(t,d) & =\frac{(k_1+1) \cdot c(t, d)}{c(t, d)+k_1 \cdot (1-b+b \cdot |d|/avdl)} \\
+& = \frac{\alpha \cdot c(t, d)}{c(t, d)+\beta \cdot |d| + c_2}, 
+\end{split}
+\end{equation}
+where $\alpha$ absorbs $k_1+1$, and $\beta=k_1\cdot b/avdl$ is a collection-dependent 
+variable and $c_2=k_1 \cdot (1-b)$ is a parameter.
+
+Furthermore, the pivoted normalization function (PIV) \cite{Singhal:1996:PDL:243199.243206} can also 
+be simplified to: 
+\begin{equation}
+\label{func:pivsimple}
+\begin{split}
+f(t,d) &= \frac{1+ln (1+ln (c(t, d)))}{(1-s+s \cdot |d|/avdl)} \\
+&= \frac{g(c(t, d))}{(\beta \cdot |d| + c_2)}, 
+\end{split}
+\end{equation}
+where $g(\cdot)=1+ln (1+ln (\cdot))$ and can be further 
+generalized as an arbitrary non-linear function. $\beta=s/avdl$ 
+is a collection related variable and $c_2=1-s$ is a parameter.
+
+
+All of  the above three simplified functions (i.e., 
+Eq. (\ref{func:dirsimplef}), Eq. (\ref{func:bm25simple}) 
+and Eq. (\ref{func:pivsimple})) can be generalized as 
+the following form: 
+\begin{equation}
+\label{func:dirsimpleformal}
+F(c(t,d), |d|) = \frac{\alpha \cdot g(c(t, d))+c_1}{\gamma \cdot c(t,d) + \beta \cdot |d|+c_2}, 
+\end{equation}
+where $g(\cdot)$ is an arbitrary non-linear function and 
+$\alpha, \beta, \gamma, c_1, c_2$ are free parameters. 
+This generalized function form is essentially a linear 
+transformation of a non-linear 
+transformation of term frequency divided by a linear transformation of  
+document length. The denominator optionally adds 
+adjusted term frequency as a method to dampen the impact of increasing 
+term frequency. Note that IDF is not part of the function because 
+it would not affect the document ranking for single-term queries. 
+
+In fact, we find that the generalized retrieval function as shown in 
+Eq. (\ref{func:dirsimpleformal}) can cover at least 11 
+retrieval functions.  In addition to the above three retrieval 
+functions, the following functions can also be generalized: 
+(1) F1EXP, F1LOG, F2EXP and F2LOG from the axiomatic retrieval 
+models \cite{Fang:2005:EAA:1076034.1076116}, 
+(2) BM3 derived from the Dirichlet Priors for term frequency normalization model 
+\cite{He:2005:SDP:1076034.1076114}, 
+and (3) BM25+, DIR+, PIV+ derived from the lower bounding
+term frequency normalization models \cite{Lv:2011:LTF:2063576.2063584}. 
+Table \ref{tab:allmodels} summarizes the instantiations for each of 
+the retrieval functions. 
+
+
+\subsection{Upper Bound Estimation for MAP}
+
+Given the general form as shown in Equation (\ref{func:dirsimpleformal}), 
+one straightforward solution to estimate the performance bound for single-term 
+queries would be to simply try all possible values/instantiations for the parameters
+and functions and then report the best performance. Thus, the problem of estimating
+performance bound boils down to the problem of searching for optimal 
+parameter settings in terms of the retrieval performance. 
+More specifically, given Eq. (\ref{func:dirsimpleformal}), we need to 
+find parameter settings for $\alpha, \beta, \gamma, c_1, c_2$ that 
+can optimize the retrieval performance measured (i.e., MAP in this paper). 
+We do not consider the instantiation of $g(\cdot)$ here, and leave it 
+as our future work. 
+
+Since it is infeasible to try all possible parameter values and find the optimal 
+setting, we propose to apply the cost/gain analysis to find the optimal 
+parameter setting. 
+
+Let us explain the notations first.  $d_i$ and $d_j$ are a pair of 
+documents.  Given a query, $s_i=f(\{t\},d_i)$ and $s_j=f(\{t\},d_j)$
+denote the relevance score of these two documents computed using a 
+retrieval function. 
+
+For a given query, each pair of documents $d_i$ and $d_j$ with 
+different relevance labels (currently we only consider the binary case, 
+i.e. whether the document is relevant or non-relevant) a ranking model 
+computes the scores $s_i=f(d_i)$ and $s_j=f(d_j)$. 
+Follow the previous studies about RankNet \cite{export:68133,export:132652}, we 
+define the cost function as the pairwise cross-entropy cost applied to 
+the logistic of the difference of the relevance scores: 
+
+\begin{equation}
+\label{eq:cost}
+C_{ij}=\frac{1}{2}(1-S_{ij})\sigma(s_i-s_j)+\mathrm{log}(1+e^{-\sigma(s_i-s_j)})
+\end{equation} 
+
+where $S_{ij}\in {\{0, \pm 1\}}$ denotes the ground-truth ranking relationship 
+of document pair $d_i$ and $d_j$: 1 if $d_i$ is relevant and $d_j$ is 
+non-relevant, -1 if $d_i$ is non-relevant and $d_j$ is relevant, 0 if 
+they have the same label.
+The gradient of the cost function is then:
+\begin{equation}
+\label{eq:cost_gradient}
+\frac{\partial C_{ij}}{\partial s_i} = \sigma \bigg(\frac{1}{2}(1-S_{ij})-\frac{1}{1+e^{\sigma(s_i-s_j)}}\bigg)=-\frac{\partial C_{ij}}{\partial s_j}
+\end{equation}
+If we only consider the total cost of ranking non-relevant 
+documents before the relevant documents, $S_{ij}$ is always 1. 
+We will always consider that $d_i$ is relevant and $d_j$ is non-relevant 
+from now on.
+The Eq. (\ref{eq:cost_gradient}) is then simplified as:
+\begin{equation}
+\label{eq:cost_gradient_simp}
+\frac{\partial C_{ij}}{\partial s_i} = \frac{-\sigma}{1+e^{\sigma(s_i-s_j)}}
+\end{equation}
+The upper bound of the performance is then obtained when the cost is 
+minimized by parameters optimization. 
+The parameters $\mathrm{p_k}\in \mathbb{R}$ used in the ranking model 
+could be updated so as to reduce the cost via stochastic gradient 
+descent: 
+\begin{equation}
+\label{eq:cost_update_para}
+\mathrm{p_k} \rightarrow \mathrm{p_k}-\eta\frac{\partial C}{\partial \mathrm{p_k}} = \mathrm{p_k} - \eta \bigg( \frac{\partial C}{\partial s_i} \frac{\partial s_i}{\partial \mathrm{p_k}} + \frac{\partial C}{\partial s_j} \frac{\partial s_j}{\partial \mathrm{p_k}} \bigg)
+\end{equation}
+% We reach to a local optimum where the parameters do not show large 
+% enough changes. 
+
+% The above approach helps us to obtained optimal relationship of 
+% document pair by swapping some of the document pairs in the original 
+% ranking list. However, there is a mismatch between the cost function 
+% and the upper bound of the performance.
+% As stated in \cite{export:68133}, the cost defined in Eq. (\ref{eq:cost_gradient_simp}) is the ``optimization'' cost which is 
+% a smooth approximation to the target cost (the actual cost). 
+% In our case the target cost is related to the specific IR measurement - 
+% MAP. Ideally the ``optimization'' cost should match the actual cost 
+% (MAP in our case). 
+% However, MAP (or most any other typical IR target cost like NDCG) 
+% are either flat or non-differentiable everywhere. 
+% Thus minimizing the cost defined in Eq. (\ref{eq:cost_gradient_simp}) 
+% may not necessarily lead to the optimal performance.
+
+% The authors of LambdaRank \cite{export:68133} tackles 
+% this problem by defining the gradients of an implicit cost function 
+% $C$ only at the particular points of interests. The gradients are 
+% defined by specific rules of how swapping a pair of documents in the 
+% ranking list changes the cost. The gradients thus depend on the ranking 
+% order of all the documents which matches the target cost.
+% By defining the gradients this way, finding the upper bound of the 
+% performance is equivalent to minimizing the target cost.
+
+% It was shown that \cite{export:68133} by multiplying the derivative of 
+% the cost shown in Eq. (\ref{eq:cost_gradient_simp}) by the size of 
+% the change in NDCG (Normalized Discounted Cumulative Gain) gain from 
+% swapping a pair of differently labeled 
+% documents for a given query $q$ leads to better accuracy on validation 
+% data. We can however easily change the measurement to any other IR 
+% measures if we aim to optimize that specific measure. The pairwise $\lambda$ 
+% can be written as:
+
+Unfortunately, the cost defined in Eq. (\ref{eq:cost_gradient_simp}) 
+is actually the ``optimization'' cost instead of the target cost 
+(the actual cost) \cite{export:68133} and thus minimizing the cost 
+may not necessarily lead to the optimal MAP.
+However, MAP is either flat or non-differentiable everywhere which 
+makes the direct optimization toward it difficult \cite{Yue:2007:SVM:1277741.1277790}. 
+To overcome this we modify Eq. (\ref{eq:cost_gradient_simp})
+by multiplying the derivative of the cost by the size of 
+the change in MAP gain from swapping a pair of differently labeled 
+documents for a given query $q$. The pairwise $\lambda$ (we change 
+cost $C$ to $\lambda$ and $\lambda$ is the gain instead of cost)
+can be written as:
+% \begin{equation}
+% \label{eq:pairwise_lambda}
+% \lambda_{ij} = \frac{\sigma}{1+e^{\sigma(s_i-s_j)}}\left |\Delta \mathrm{Measure}\right |
+% \end{equation} 
+% Since our aim is to find the upper bound for MAP, we can substitute 
+% the $|\Delta \mathrm{Measure}|$ part in Eq. (\ref{eq:pairwise_lambda}) 
+% with $|\Delta \mathrm{AP}|$ (it should be $|\Delta \mathrm{AP}@k|$ where 
+% $k=\infty$ and we just ignore the $k$):
+% \begin{equation}
+% \label{eq:pairwise_lambda_map}
+% \lambda_{ij} = \frac{\sigma}{1+e^{\sigma(s_i-s_j)}}\left |\frac{1}{R}\bigg(\sum_{k=r_j}^{r_i}{\mathrm{I}(k)\mathrm{P}@k} - \sum_{k=r_j}^{r_i}{\mathrm{I}'(k)\mathrm{P}'@k} \bigg)\right |
+% \end{equation} 
+% where $r_i$ and $r_j$ are the ranking positions of $d_i$ and $d_j$; 
+% $\mathrm{I}(k)=1$ if the document at $k$th position of the ranking list 
+% is relevant and 0 otherwise; $\mathrm{P}@k$ is the precision at rank 
+% $k$; $\mathrm{I}'(k)$ is the relevance indicator after swapping the two 
+% documents; $\mathrm{P}'@k$ is the precision at $k$ after the swap; 
+% $R$ is the number of relevant document for the query. 
+% Actually, the difference of precision for positions $k \in 
+% \{r_j+1,...,r_i-1\}$ can be rewritten as $\sum_{k=r_j+1}^{r_i-1}{\frac{\mathrm{I}(k)}{k}}$ and the difference of precision for the swapping 
+% points $r_j$ and $r_i$ is $\left | \frac{n}{r_j} - \frac{m}{r_i} \right |$ where $n$ and $m$ are the number of relevant documents until 
+% positions $r_j$ and $r_i$. Eq. (\ref{eq:pairwise_lambda_map}) is then 
+% rewritten as:
+\begin{equation}
+\label{eq:pairwise_lambda_map_simp}
+\lambda_{ij} = \frac{\sigma}{1+e^{\sigma(s_i-s_j)}}\frac{1}{|R|}\bigg( \left | \frac{n}{r_j} - \frac{m}{r_i} \right | + \sum_{k=r_j+1}^{r_i-1}{\frac{\mathrm{I}(k)}{k}} \bigg)
+\end{equation}
+where $r_i$ and $r_j$ are the ranking positions of $d_i$ and $d_j$; 
+$m$ and $n$ are the number of relevant documents before position 
+$r_i$ and $r_j$;
+$\mathrm{I}(k)=1$ if the document at $k$th position of the ranking list 
+is relevant and 0 otherwise; 
+$|R|$ is the number of relevant document for the query. 
+% For any pair of documents for a query with different relevance labels, 
+% the $\lambda$s are the equal forces with opposite direction: 
+% positive $\lambda$ pushes the relevant document upward to the 
+% top of the ranking list and negative $\lambda$ pushes the non-relevant 
+% document downward to the bottom of the ranking list. 
+The model parameters are adjusted based on the aggregated $\lambda$ 
+for all pairs of documents for the query using a small 
+(stochastic gradient) step.
+
+The optima are local optima with 99\% of the confidence by following 
+the Monte-Carlo method with model parameters chosen from 459 random 
+directions \cite{export:81144}.
+
+
+% \begin{table*}[t]
+% \centering
+% \caption{Optimal Performances of Retrieval Models}
+% \label{tab:alloptperformances}
+% \begin{tabular}{ |c|c|c|c|c|c|c|c|c| } \hline
+% Model & \multicolumn{2}{c|}{disk12} & \multicolumn{2}{c|}{Robust04} & \multicolumn{2}{c|}{WT2G} & \multicolumn{2}{c|}{GOV2} \\\hline \hline
+
+% DIR & 0.4009 & $\mu:500$ & 0.3823 & $\mu:4500$ & 0.3660 & $\mu:5000$ & 0.2083 & $\mu:500$ \\ \hline
+% BM25 & 0.4016 & $b:0.4$ & 0.3824 & $b:0.1$ & 0.4038 & $b:0.0$ & 0.2896 & $b:0.0$ \\ \hline
+% PIV & 0.3987 & $s:0.05$ & 0.3812 & $s:0.05$ & 0.4038 & $s:0$ & 0.3079 & $s:0.3$ \\ \hline
+% F2EXP & 0.4000 & $s:1.0$ & 0.3682 &$s:0.95$ & 0.3183 & $s:0.95$ & 0.1950 & $s:0.95$ \\ \hline
+% BM3 & 0.4015 & $\mu:600$ & 0.3823 & $\mu:4500$ & 0.3792 & $\mu:9700$ & 0.2554 & $\mu:200$ \\ \hline
+% DIR+ & 0.4009 & $\mu:500,\delta:1.2$ & 0.3823 & $\mu:4500,\delta:0.14$ & 0.3794 & $\mu:10000,\delta:0.03$ & 0.2083 & $\mu:500,\delta:1.2$ \\ \hline
+
+% \end{tabular}
+% \end{table*}
+
+
+\section{Experiments}
+\label{sec:exp}
+
+\subsection{Testing Collections}
+\label{sec:data}
+
+We use four TREC collections: disk12, Robust04, WT2G and Terabyte (GOV2) 
+to conduct the experiments. For the queries, only the title fields 
+of the query topics with only one query term are used (20 in total). 
+We use Dirichlet language model with default $\mu=2500$ to 
+retrieve at most top 10,000 documents as the documents pool for the 
+pairwise comparison for each query. 
+For relevance labels that less or equal to zero is treated as 
+non-relevant and labels greater than zero are treated as relevant. 
+An overview of the involved collections and queries are 
+listed in Table \ref{tab:datasets}.
+
+\begin{table}[t]
+\centering
+\caption{collections and queries}
+\label{tab:datasets}
+\begin{tabular}{ ccccc } \hline
+ & disk12 & Robust04 & WT2G & GOV2 \\\hline \hline
+\#queries & 4 & 11 & 3 & 2 \\ \hline
+qid & \begin{tabular}[x]{@{}l@{}}57,75,77,78\end{tabular} & \begin{tabular}[x]{@{}l@{}}312,348,349,364,367,379,\\392,395,403,417,424\end{tabular} & \begin{tabular}[x]{@{}l@{}}403,417,424\end{tabular} & 757,840 \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Experiment Setup}
+\label{sec:exp_factors}
+
+We tested both using the cost function only and using the cost function 
+together with $\lambda$ component of MAP. The results are very close 
+and the cost with $\lambda$ seems to be a little bit superior so we 
+just report that part of the results.
+We basically tried several different models based on Eq. (\ref{func:dirsimpleformal}):
+\begin{itemize}
+\item \textbf{DIR$^U$}: Dirichlet Language Model, denoted as \\ $\frac{c(t,d)+\mu\cdot p(t|C)}{|d|+\mu}$ 
+\item \textbf{TFDL1$^U$}: which only contains $c_1$ and $c_2$ as model parameters, denoted as $\frac{c(t,d)+c_1}{|d|+c_2}$
+\item \textbf{TFDL2$^U$}: which takes $\alpha,\beta,c_1,c_2$ as parameters, denoted as $\frac{\alpha \cdot c(t,d)+c_1}{\beta \cdot |d|+c_2}$
+% \item \textit{TFDL3}: which takes $\alpha,\beta,\gamma,c_1,c_2$ as parameters.
+\end{itemize}
+For other possible format of Eq. (\ref{func:dirsimpleformal}) they are 
+essentially covered by TFDL2$^U$ so we do not report the results for them\footnote{Actually they are possibly covered by 
+Eq. (\ref{func:dirsimpleformal}). But if we choose wide spectrum of 
+the starting points then they are covered by large chance.}.
+% For each model we tried both using cost only (denoted as COST and suffix with C) 
+% and using cost with MAP (denoted as COST+MAP and suffix with CM).
+
+
+
+% \begin{table}[t]
+% \centering
+% \caption{Test Models}
+% \label{tab:exp_factor}
+% \begin{tabular}{ lc } \hline
+% Name & Model \\\hline \hline
+% DIR$^U$ & $\frac{c(t,d)+\mu\cdot p(t|C)}{|d|+\mu}$ \\ \hline
+% TFDL1$^U$ & $\frac{c(t,d)+c_1}{|d|+c_2}$ \\ \hline
+% TFDL2$^U$ & $\frac{\alpha \cdot c(t,d)+c_1}{\beta \cdot |d|+c_2}$ \\ % \hline
+% TFDL3 & $\frac{\alpha \cdot c(t,d)+c_1}{\gamma \cdot c(t,d) + \beta \cdot |d|+c_2}$ \\ \hline
+% \end{tabular}
+% \end{table}
+
+For all of our experiments, we varied the learning rate $\eta$ between 
+$10^0$ to $10^{10}$ with step size 10 times to previous value. 
+We have found that optimal learning rate brings marginal gain in terms 
+of overall performance. So we just report the 
+performance on the optimal learning rate. For the starting 
+point, we choose $\alpha, \beta, c_1, c_2$ from $[0.1, 10000]$ with 
+step size 10 times to previous value. 
+We set the learning iteration at most 500 epochs and it stops 
+if the gain was constant over 20 epochs.
+
+
+\subsection{Results}
+\label{sec:res1}
+
+\begin{table}[t]
+\centering
+\caption{Upper Bound of MAP}
+\label{tab:results_optm}
+\begin{tabular}{ clcccc } \hline
+& & disk12 & Robust04 & WT2G & GOV2 \\ \hline \hline
+& DIR & 0.4009 & 0.3823 & 0.3660 & 0.2083 \\ \cline{2-6}
+Models & BM25 & \textbf{0.4016} & \textbf{0.3824} & \textbf{0.4038} & 0.2896 \\ \cline{2-6}
+with & PIV & 0.3987 & 0.3812 & \textbf{0.4038} & \textbf{0.3079} \\ \cline{2-6}
+Basic & F2EXP & 0.4000 & 0.3682 & 0.3183 & 0.1950 \\ \cline{2-6}
+Signals & BM3 & 0.4015 & 0.3823 & 0.3792 & 0.2554 \\ \cline{2-6}
+& DIR+ & 0.4009 & 0.3823 & 0.3794 & 0.2083 \\ \cline{2-6} \hline \hline 
+% DIRC & 0.4244 & 0.4054 & 0.4054 & 0.2953 \\ \hline
+% DIRCM & 0.4244 & 0.4136 & 0.4055 & 0.2724 \\ \hline
+% TFDL1C & 0.4251 & 0.4169 & 0.4071 & 0.3157 \\ \hline
+% TFDL1CM & 0.4273 & 0.4209 & 0.4095 & 0.3193 \\ \hline
+% TFDL2C & 0.4253 & 0.4177 & 0.4071 & 0.3254 \\ \hline
+% TFDL2CM & 0.4273 & 0.4209 & 0.4095 & 0.3255 \\ \hline
+% TFDL3C & 0.4253 & 0.4178 & 0.4071 & 0.3255 \\ \hline
+% TFDL3CM & 0.4273 & 0.4209 & 0.4095 & 0.3255 \\ \hline
+Upper & DIR$^U$ & 0.4244$^\dagger$ & 0.4136$^\dagger$ & 0.4055 & 0.2724 \\ \cline{2-6}
+Bounds & TFDL1$^U$ & 0.4273$^\dagger$ & 0.4209$^\dagger$ & 0.4095 & 0.3193$^\dagger$ \\ \cline{2-6}
+& TFDL2$^U$ & \textbf{0.4273$^\dagger$} & \textbf{0.4209$^\dagger$} & \textbf{0.4095} & \textbf{0.3255$^\dagger$} \\ \cline{2-6}
+% TFDL3 & 0.4273$^\dagger$ & 0.4209$^\dagger$ & 0.4095 & 0.3255$^\dagger$ \\ \hline
+\hline
+\end{tabular}
+\end{table}
+
+Table \ref{tab:results_optm} lists both the optimal performances of 
+previously proposed ranking models with optimal parameters chosen from 
+a wide range (e.g. for DIR and DIR+ $\mu \in [0, 5000]$ with step size 
+500; for BM25, BM3, PIV, F2EXP $b$ or $s \in [0, 1]$ with step size 0.1) 
+and optima of proposed models. 
+The values listed in the table are the MAPs of single 
+term queries only (not the whole set of the queries).
+%First we notice that in general, the obtained values of using COST only 
+%and using COST+MAP are very close. Using COST+MAP we can get 
+%marginal gains though which indicating the effectiveness of the added 
+%MAP gradient in Eq. (\ref{eq:pairwise_lambda_map}). 
+It is shown that the generalized models are better than 
+classic ranking models for the most cases (indicated 
+by the $^\dagger$ which means the two-tailed paired t-test at p value 
+of 0.05 comparing with the optimal performances of selected models 
+which are boldfaced). 
+Furthermore, different collections have different gains. 
+Robust04 has the largest gain between the two results which indicating 
+that possibly the previously proposed ranking models do not capture the 
+critical ranking signals well or the statistics they use contradicts 
+with the actual properties of relevant documents. 
+Also, for WT2G we get very little gain by applying our analysis (the 
+performances are even not significant better than the selected models). 
+This probably means that if we would like to further improve the 
+performance on WT2G we need to find other forms of the ranking models 
+which may look different than Eq. (\ref{func:dirsimpleformal}). 
+%Moreover, it shows that except GOV2, the optimal performances of 
+%different models are the same indicating adding more parameters to 
+%the model would not affect the results too much. 
+%The possible reason for this is that since all 
+%the parameters are belong to $\mathbb{R}$, the optimal performance of 
+%the model with more parameters has already been covered by the models 
+%with less parameters. For example, TFDL3 is actually indeed covered by 
+%TFDL2 in the sense that the optimal value of $\gamma \cdot c(t,d) + c_2$ 
+%is equivalent to the optimal value of $c_2$.
+
+
+
+\subsection{Parameters}
+\label{sec:res2}
+
+Next, we would like to investigate the parameters that lead to the 
+optima for the proposed models. The parameters are worthy to 
+look at since they might inspire or provide intuition of better 
+performing models in the future.
+\begin{table}[t]
+\centering
+\caption{Parameters}
+\label{tab:results_paras}
+\begin{tabular}{ lccccc } \hline
+Model & Paras & disk12 & Robust04 & WT2G & GOV2 \\\hline \hline
+%DIRC & $\mu$ & 4.4e3 & 1.09e9 & 8.33e6 & 1.44e1 \\ \hline
+DIR$^U$ & $\mu$ & 4.66e3 & 3.54e7 & 1.43e6 & 0 \\ \hline
+%TFDL1C & $\frac{c_1}{c_2}$ & 1.58e-3 & 2.2e-1 & 8.21e-5 & 5e-5 \\ \hline
+TFDL1$^U$ & $\frac{c_1}{c_2}$ & 2.49e-3 & 1.0 & 6.87e-5 & 6.0e-1 \\ \hline
+%\multirow{2}{*}{TFDL2C} & $\frac{c_1}{c_2}$ & 5.63e-1 & 5.43e-2 & 5.98e1 & 6.58e1 \\
+%& $\frac{\alpha}{\beta}$ & 5e-3 & 5.63e-2 & 4.85e-3 & 4.34e-3 \\ \hline
+\multirow{2}{*}{TFDL2$^U$} & $\frac{c_1}{c_2}$ & 1.55e-2 & 5.86e-2 & 1.08e1 & 1.39e-1 \\
+& $\frac{\alpha}{\beta}$ & 1.37e-4 & 1.43e-2 & 1.01e-2 & 1.13e-2 \\ \hline
+\end{tabular}
+\end{table}
+Table \ref{tab:results_paras} lists those parameters. 
+As we can see, for DIR$^U$ the optimal parameters $\mu$ obtained for 
+Robust04 and WT2G are much larger than $10^{3}$ which is suggested 
+value by the original authors of DIR 
+\cite{Zhai:2004:SSM:984321.984322}. 
+For TFDL1$^U$ we choose to report the ratio $\frac{c_1}{c_2}$. 
+The values vary between collections. 
+For example, the optimal values for Robust04 is 1.0 which indicates that 
+the better performed models would have larger dampen factor for document 
+length than other collections.  
+For TFDL2$^U$ both $\frac{c_1}{c_2}$ and $\frac{\alpha}{\beta}$ are 
+reported. We find that $\alpha$ is in several magnitude levels 
+smaller than $\beta$. But this is not always the truth for $\frac{c_1}{c_2}$. 
+We would expect more impact on $\frac{\alpha}{\beta}$ than 
+$\frac{c_1}{c_2}$ and the values of $\frac{\alpha}{\beta}$ 
+could be better incorporated by better performing models in 
+the future.
+
+
+\section{Conclusions}
+\label{sec:con}
+
+We have applied cost/gain analysis to the performance 
+upper bound of single term queries for TREC collections. 
+The found upper bounds of MAP provide sound foundation 
+of potentially better performed ranking models in the 
+future. Moreover, the parameters that lead to the local 
+optimums provide more insight about how the future models 
+could better incorporate proper statistics/signals.
