@@ -44,8 +44,10 @@ extends the previous findings on how users interact with the
 search engine especially the search results. 
 
 Our developed systems {\em VIRLab} and {\em RISE} are closely related to 
-the ideas of Privacy Preserved Evaluation (PPE) \cite{Fang:2014:VWV:2600428.2611178}
-and Evaluation as a Service (EaaS) \cite{rao:ecir:2015,Lin:2013:ESI:2568388.2568390,Lin:2014:ISE:2567948.2577014}. 
+the ideas of Privacy Preserved Evaluation (PPE) 
+\cite{Fang:2014:VWV:2600428.2611178}
+and Evaluation as a Service (EaaS) 
+\cite{rao:ecir:2015,Lin:2013:ESI:2568388.2568390,Lin:2014:ISE:2567948.2577014}. 
 VIRLab \cite{Fang:2014:VWV:2600428.2611178} provides a web service
 for users to implement retrieval functions. It is mainly designed
 to facilitate teaching IR models. RISE is also designed as a 
@@ -87,7 +89,8 @@ a complete set of benchmark results of IR models.
 
 Although there are lots of effective ranking models proposed by researchers, 
 there are fewer studies dedicated to the theoretical analysis of their 
-performances upper bound. One related domain is the constraint analysis \cite{Fang:2004:FSI:1008992.1009004} which proposes formal constraints 
+performances upper bound. One related domain is the constraint analysis 
+\cite{Fang:2004:FSI:1008992.1009004} which proposes formal constraints 
 that a reasonable ranking model should bear. Examples of the constraints 
 including how should a ranking model incorporate TF, how to regulate 
 the interaction of TF and DL, how to penalize long document in the 
@@ -98,7 +101,8 @@ well as the optimal parameters which helps to fine tune the constraint
 theory. 
 
 Our estimation method is mostly inspired by the RankNet 
-\cite{export:68133,export:132652} and the LambdaRank \cite{export:132652,export:81144} which are 
+\cite{export:68133,export:132652} and the LambdaRank 
+\cite{export:132652,export:81144} which are 
 successful in the learning to rank domain. 
 In their works they apply the pair-wise documents comparison for a 
 specific query which is also adopted by our work.
@@ -111,7 +115,8 @@ ranking models.
 (2) we aim to optimize MAP instead of NDCG and we proposed a simplified 
 equation for calculating the difference of MAP if two documents are 
 swapped in the ranking list which can make the analysis more efficiency. 
-There is another work which indeed directly optimizes MAP called SVMMAP \cite{Yue:2007:SVM:1277741.1277790}. SVMMAP is actually another learning 
+There is another work which indeed directly optimizes MAP called SVMMAP 
+\cite{Yue:2007:SVM:1277741.1277790}. SVMMAP is actually another learning 
 to ranking algorithm based on support vector machine. It performs 
 optimization only on a working set of constraints which is extended with 
 the most violated constraint at each optimization step. 
@@ -125,7 +130,8 @@ our experiments.
 
 The problem of contextual suggestion was first introduced at
 TREC in 2012, and the track has been running in the past 
-four years \cite{adriel:overview,adriel:overview2013,adriel:overview2014,adriel:overview2015}. 
+four years \cite{adriel:overview, adriel:overview2013, adriel:overview2014, 
+adriel:overview2015}. 
 Although the details of the track varied, the task remains 
 the same.  Given a user's preferences on a set of example 
 suggestions and a context, track participants
@@ -136,33 +142,33 @@ geotemporal locations. Each example suggestion includes a title,
 description and an associated URL. For each user, we know their 
 preferences on part or all of the example suggestions. 
 
-Most TREC participants retrieved
-candidate suggestions from various online services such as 
+Most TREC participants retrieved candidate suggestions from various 
+online services such as 
 Google Place %\footnote{\url{https://developers.google.com/places/}}  
 or Yelp %\footnote{\url{http://www.yelp.com}} 
-based on the geographical context
-and then use some heuristics, e.g. nightclub will not be shown if 
-the temporal context is in the morning, to filter out the 
-suggestions that do not match the temporal contexts 
+based on the geographical context and then use some heuristics, 
+e.g. nightclub will not be shown if the temporal context is in the morning, 
+to filter out the suggestions that do not match the temporal contexts 
 \cite{adriel:overview, adriel:overview2013}.
 After that, the task is to retrieve useful suggestions based on 
 user preferences. Most participants formulated the task as a 
 content-based recommendation problem 
-\cite{irit:treccs2012,georgetown:treccs2012,
-udel:treccs2012,udben:treccs2012, isi:treccs2013, up:treccs2013, udel:treccs2014, cmu:treccs2014, bjut:treccs2014, rama:treccs2014, glasgow:treccs2014}. 
+\cite{irit:treccs2012, georgetown:treccs2012, udel:treccs2012, 
+udben:treccs2012, isi:treccs2013, up:treccs2013, udel:treccs2014, 
+cmu:treccs2014, bjut:treccs2014, rama:treccs2014, glasgow:treccs2014}. 
 A common strategy adopted by top-ranked participants of TREC is to 
 estimate a user profile based on the example suggestions and then rank 
 candidate suggestions based on their similarities to the user profile. 
 The basic assumption is that a user would prefer suggestions that are 
 similar to those example suggestions liked by the user.  
-Various types of information about the suggestions have been used
-to estimate user profiles which include 
-the description of the places \cite{udel:treccs2012,irit:treccs2012,up:treccs2013}, 
-the categories of the places \cite{rama:treccs2014,bjut:treccs2014,glasgow:treccs2014,
-georgetown:treccs2012,uamst:treccs2013},
-and the web sites of the places \cite{udel:treccs2012,irit:treccs2012,up:treccs2013}.
+% Various types of information about the suggestions have been used
+% to estimate user profiles which include 
+% the description of the places \cite{udel:treccs2012,irit:treccs2012,up:treccs2013}, 
+% the categories of the places \cite{rama:treccs2014,bjut:treccs2014,glasgow:treccs2014,
+% georgetown:treccs2012,uamst:treccs2013},
+% and the web sites of the places \cite{udel:treccs2012,irit:treccs2012,up:treccs2013}.
 
-Specifically, many studies used terms from the description of the places or 
+There are some studies that used terms from the description of the places or 
 the web pages of the example suggestions to construct user profiles, 
 and then various similarity measures are used to rank the candidates
 \cite{udel:treccs2012,irit:treccs2012,up:treccs2013}. 
@@ -184,16 +190,13 @@ recommend the candidates which are proportional to the number of
 example suggestions in each category.
 Koolen et al. \cite{uamst:treccs2013} applied a similar method 
 with a major modification of 
-retrieving the category information from Wikitravel\footnote{http://www.wikitravel.org/}.
+retrieving the category information from 
+Wikitravel\footnote{http://www.wikitravel.org/}.
 
-However, none of other groups has tried to leverage the reviews
-about these places to estimate the user profile as what we 
-propose in this paper. As we mentioned earlier, using either 
-descriptions or categories can not precisely capture what a 
-user likes or dislikes. However, online reviews offer rich 
-information about user opinions and should be leveraged 
-in user profiling. To the best of our knowledge, we are the first ones who incorporate 
-opinions as user profiles in pursuing better solution for contextual suggestion.
+Although we also use category and description of example suggestions 
+to build user profile, we propose to leverage text reviews about the 
+example suggestion to estimate the user profile which is unseen from 
+previous works.
 
 \subsection{Recommendation Systems} 
 
@@ -229,7 +232,9 @@ opinions of the local experts.
 
 
 Our work is also related to other studies that utilized reviews to improve 
-the performance of recommendation systems \cite{Qumsiyeh:2012:PRM:2348283.2348349,SanPedro:2012:LUC:2187836.2187896,Raghavan:2012:RQA:2365952.2365978,hariricontext,Levi:2012:FNH:2365952.2365977}.
+the performance of recommendation systems 
+\cite{Qumsiyeh:2012:PRM:2348283.2348349, SanPedro:2012:LUC:2187836.2187896, 
+Raghavan:2012:RQA:2365952.2365978,hariricontext,Levi:2012:FNH:2365952.2365977}.
 Raghavan et al. \cite{Raghavan:2012:RQA:2365952.2365978} proposed to 
 use the helpfulness, features from the text reviews and 
 the meta-data (average rating, average length of text reviews and etc.) 
@@ -255,7 +260,7 @@ collaborative filtering were often evaluated on only specific applications,
 e.g., movies, hotels, and it is unclear how those methods could 
 be generalized to other domains. In contrast, our proposed method 
 is not limited to any specific domains and can be applied to 
-a more general problem set up.  
+a more general problem set up.
 
 \subsection{Text Summarization} 
 
@@ -285,6 +290,5 @@ extracting the information from a single source, we try to
 leverage one information source to guide the extractive 
 summarization process in other sources and then assemble
 all the extracted summaries together into a {\em structural} way.  
-Another main difference
-of our work from previous studies is to utilize the user profile 
-to generate personalized summaries.  
+Another main difference of our work from previous studies is to 
+utilize the user profile to generate personalized summaries.  
