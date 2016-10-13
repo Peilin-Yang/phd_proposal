@@ -11,3 +11,5 @@ fi
 
 dvips -P cmz -t letter -o $main.ps  $main.dvi
 ps2pdf $main.ps $main.pdf
+
+cp $main.pdf proposal-peilin_yang.pdf

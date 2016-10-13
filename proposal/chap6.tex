@@ -3,3 +3,25 @@
 %
 \chapter{Future Work}
 
+For the future work, there are mainly two directions to explore more. 
+
+The first one is to further investigate the impact of different contexts 
+of unified IR evaluation system. One limitation of our current solution 
+to this, namely RISE, only uses Indri as its underlying retrieval tool. 
+It is more valuable for us to quantify the impact of using different 
+tools, e.g. Lucene. 
+We hope to be the first to report on standardizing and quantifying the 
+impact so that the IR community could be aware of such divergence and can 
+better evaluate the contributions of using various tools. 
+
+The second direction is to provide more sound justification about the 
+boundary theory of ranking model performance. Specifically, 
+it is desirable to extend the current analysis on the 
+single term queries to multiple term queries. One difficulty of this 
+direction is that when there are multiple terms in the query there 
+is basically no simplified form of a bunch of ranking models. 
+This means that we need either change our method for multiple term 
+queries or find some way to transform different ranking models to 
+a unified form.
+One way could be combining the axiomatic analysis with the 
+explanatory analysis, where we can predict rough estimates.
