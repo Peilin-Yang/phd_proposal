@@ -10,11 +10,13 @@ a better understanding of users' information need can be achieved and
 it thus leads to improved user satisfaction. More importantly, such a 
 system could {\em proactively} recommend suggestions based on the contexts.
 
-User profiling is essential in contextual suggestion. However, given most 
-users' observed behaviors are sparse and their preferences are latent in 
-an IR system, constructing accurate user profiles is generally difficult. 
-In our work, we focus on location-based contextual suggestion and propose 
-two approaches to construct user profiles. 
+User profiling is essential and is the key to success in contextual suggestion. 
+Since user's preference is always modeled as long-term and static we include 
+it as part of the context of this problem.
+Given most users' observed behaviors are sparse and their preferences are 
+latent in an IR system, constructing accurate user profiles is generally 
+difficult. In our work, we focus on location-based contextual suggestion 
+and propose two approaches to construct user profiles. 
 
 The first approach uses the categories and/or descriptions from 
 users' activities history to build user profile. The rationale here is 
@@ -25,7 +27,6 @@ several negatively rated suggestions in the past. We compute the similarity
 of category/description between each candidate suggestion and all 
 places in the user's activity history and combine the averages of 
 both positive and negative scores. 
-Experiment results show pretty decent performance of using this method. 
 
 The second approach leverages the users' opinions to form the user profiles. 
 By assuming users would like or dislike a place with similar reasons, 
@@ -33,35 +34,37 @@ we construct the opinion-based user profile in a collaborative way:
 opinions from the other users are leveraged to estimate a profile for 
 the target user. Candidate suggestions are represented in the same fashion 
 and ranked based on their similarities with respect to the user profiles.
+
 Moreover, we also develop a novel summary generation method that utilizes 
 the opinion-based user profiles to generate personalized and high-quality 
 summaries for the suggestions. 
+
 Experiments conducted over three standard TREC Contextual suggestion 
-collections and a Yelp data set show the advantage of this approach and 
+collections and a Yelp data set show the advantage of our approaches and 
 the system developed based on the proposed methods have been ranked as 
 top 1 in both TREC 2013 and 2014 Contextual Suggestion tracks.
 
-\section{Introduction}
+% \section{Introduction}
 
-The increasing availability of internet access on
-mobile devices, such as smart phones and tablets,
-has made mobile search a new focus of information retrieval (IR) research community.
-The contextual information such as geographical and temporal 
-information that is available in mobile search environment provides 
-unique opportunities for IR systems 
-to better understand its users. Moreover, a user's preference history 
-collected in a mobile search system can be incorporated with such 
-contextual information to better understand the user's informational need. 
-Ideally, a mobile search system should thus {\em proactively} generate 
-suggestions for various user information needs.  
-For example, it would be useful to automatically send recommendations about 
-the Beatles museum to a music fan who travels to Liverpool. In addition to 
-returning a list of suggestions to the user, it would also be useful 
-to provide a short yet \textit{informative summary} for each suggestion so that 
-the user can easily decide whether the recommended suggestion is interesting 
-before accepting it. This problem is referred to as {\em contextual suggestion}, 
-and has been identified as one of the IR challenges (i.e,. ``finding what you 
-need with zero query terms'') in the SWIRL 2012 workshop \cite{allan:2012}.
+% The increasing availability of internet access on
+% mobile devices, such as smart phones and tablets,
+% has made mobile search a new focus of information retrieval (IR) research community.
+% The contextual information such as geographical and temporal 
+% information that is available in mobile search environment provides 
+% unique opportunities for IR systems 
+% to better understand its users. Moreover, a user's preference history 
+% collected in a mobile search system can be incorporated with such 
+% contextual information to better understand the user's informational need. 
+% Ideally, a mobile search system should thus {\em proactively} generate 
+% suggestions for various user information needs.  
+% For example, it would be useful to automatically send recommendations about 
+% the Beatles museum to a music fan who travels to Liverpool. In addition to 
+% returning a list of suggestions to the user, it would also be useful 
+% to provide a short yet \textit{informative summary} for each suggestion so that 
+% the user can easily decide whether the recommended suggestion is interesting 
+% before accepting it. This problem is referred to as {\em contextual suggestion}, 
+% and has been identified as one of the IR challenges (i.e,. ``finding what you 
+% need with zero query terms'') in the SWIRL 2012 workshop \cite{allan:2012}.
 
 
 \section{Problem Formulation} 
@@ -124,20 +127,13 @@ services such as Yelp and Tripadvisor.
 
 \section{Method with Category and Description}
 
-\subsection{Gathering Candidate Suggestions}
-To collect candidate suggestions, we crawl the information 
-from multiple online sources such as Yelp and Foursquqre 
-based on the geographical information from the 50 contexts. 
-The collected candidate suggestions have different fields
-such as categories, web sites, business hours, etc. 
-Moreover, we also crawl the web site for each candidate 
-suggestion. 
-
 \subsection{Ranking based on User Profiles}
 
-We now describe how to rank candidate suggestions based on 
-user profiles. The profile of each user consists of the user's 
-preferences for 49 example locations. The locations that a 
+We first describe our framework of how to rank candidate suggestions 
+based on user profiles. How to use the category and description to build 
+user profile will be introduced later. 
+The profile of each user consists of the user's 
+preferences for example suggestions. The suggestions that a 
 user likes are referred to as ``positive examples'', and those
 disliked by the user are referred to as ``negative examples''. 
 Intuitively, the relevance score of a candidate suggestion should 
@@ -150,17 +146,17 @@ that the user likes, and $N(U)$ denote negative examples, i.e., a set
 of places that the user dislikes. The relevance score of $C$ with 
 respect to $U$ can then be computed as follows:  
 \begin{eqnarray}
-    S(U,C) &=& \varphi \times S_P(P(U),C) + (1-\varphi) \times S_N(N(U),C) \\
-&=& \varphi \times \frac{\sum_{p \in P(U)}{SIM(p,C)}}{|P(U)|} 
-+ (1-\varphi) \times \frac{\sum_{p \in N(U)}{SIM(n,C)}}{|N(U)|}, 
+    S(U,CS) &=& \varphi \times S_P(P(U),CS) + (1-\varphi) \times S_N(N(U),CS) \\
+&=& \varphi \times \frac{\sum_{p \in P(U)}{SIM(p,CS)}}{|P(U)|} 
++ (1-\varphi) \times \frac{\sum_{p \in N(U)}{SIM(n,CS)}}{|N(U)|}, 
 \label{eq:13}
 \end{eqnarray}
 
 where $\varphi \in [0,1]$ and it regularize the weights between the 
 positive and negative examples. When $\varphi=1$, the highly ranked 
-suggestions would be those similar to the locations that the user likes. 
+suggestions would be those similar to the suggestions that the user likes. 
 When $\varphi=0$, the highly ranked suggestions would be those 
-different from the locations that the user dislikes. 
+different from the suggestions that the user dislikes. 
 $S_P(P(U),C)$ measures the similarity between the positive user profile
 and the candidate suggestion, and we assume that it can be computed 
 by averaging the similarity scores between each positive example and 

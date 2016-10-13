@@ -57,28 +57,27 @@ testing environment which is responsible for everything related
 to the evaluation process except the ranking model part. That said, everything 
 including pre-processing and indexing the documents, generating the ranking 
 list, evaluating the results, the choice of evaluation metrics and 
-interpretation of the performance, all should under the same setting 
+interpretation of the performance, all should be under the same settings 
 if one's purpose is purely compare the effectiveness of different ranking models.
 For this problem the unified testing environment is regarded as the context of 
 the evaluation process. 
 
-Apparently the context of this problem is the very basis of any kind of 
-comparison between ranking models and thus should be carefully treated. 
+Apparently the context of this problem is the very basis of comparing the 
+effectiveness of ranking models and thus should be carefully treated. 
 Without this context researchers cannot make sound claim about 
 their proposed models. Unfortunately, there is no such environment for the 
 IR community. People continuously report different performances on the same 
 baseline model \cite{Yang:2016:RSI:2970398.2970415} and this casts doubt on 
 the real effectiveness of the proposed models.
 
-In our work, two systems, namely VIRLab \cite{Fang:2014:VWV:2600428.2611178} 
-and RISE \cite{Yang:2016:RSI:2970398.2970415} are proposed in order to offer 
+In our work, two systems, namely VIRLab (Virtual IR Lab) 
+\cite{Fang:2014:VWV:2600428.2611178} 
+and RISE (Reproducible Information retrieval System Evaluation) 
+\cite{Yang:2016:RSI:2970398.2970415} are proposed in order to offer 
 a unified context to the IR community for standardization of comparing 
 ranking models. The uniqueness and the advantage of these two systems is 
 that they offer centralized and controlled IR evaluation systems which 
-facilitate the fair comparison of retrieval models. The systems are the 
-instantiation and expansion of Privacy Preserving Evaluation (PPE) 
-\cite{Fang:2014:VWV:2600428.2611178} 
-and Evaluation as a Service (EaaS) \cite{rao:ecir:2015}. 
+facilitate easy but trusted comparison of retrieval models. 
 With the help of these systems (in our case we use RISE) 
 we are able to conduct a comprehensive reproducibility study for information 
 retrieval models. 
@@ -91,29 +90,35 @@ for majority of the retrieval functions. Among all the implemented functions,
 only one of them consistently generates worse performance than the one 
 reported in the original paper. Moreover, we report the retrieval 
 performance of all the implemented retrieval functions over all the 16 
-TREC collections including recently released ClueWeb sets. 
+TREC collections including recently released ClueWeb datasets. 
 To the best of our knowledge, this is the first time of reporting such a 
 large scale comparison of IR retrieval models. Such a comparison can be used 
 as the performance references of the selected models.
 
 
 \section{Boundary Theory of Bag-of-Terms Models}
-With the unified IR evaluation system like VIRLab and RISE at hand we are 
-able to compare different ranking models. After an ever comprehensive 
-comparison \cite{Yang:2016:RSI:2970398.2970415,Yang:2016:ERP:2970398.2970428} 
-we find that the optimum performances of several TREC collections are quite 
-similar for different models. For those models \cite{Robertson96okapiat3,Singhal:1996:PDL:243199.243206,Zhai:2004:SSM:984321.984322,Amati:2002:PMI:582415.582416,Fang:2005:EAA:1076034.1076116,Lv:2011:LTF:2063576.2063584,He:2005:SDP:1076034.1076114} 
-all of them are based on bag-of-terms document representation assumption. 
+With the unified IR evaluation system like VIRLab and RISE we have mentioned 
+above we are able to compare ranking models with ease and trust. 
+After a comprehensive comparison of the most widely used ranking models 
+\cite{Yang:2016:RSI:2970398.2970415,Yang:2016:ERP:2970398.2970428} 
+we find that the optimum performances of some models 
+\cite{Robertson96okapiat3,Singhal:1996:PDL:243199.243206,
+Zhai:2004:SSM:984321.984322,Amati:2002:PMI:582415.582416,
+Fang:2005:EAA:1076034.1076116,Lv:2011:LTF:2063576.2063584,
+He:2005:SDP:1076034.1076114}
+are quite similar on several TREC collections. 
+The commonalities of those models are: 
+(1) all of them are based on bag-of-terms document representation assumption. 
 That is, terms in the document are independent with each other and the 
 occurrence (or absence) of one term does not affect the occurrence (or absence) 
-of any other terms.   
-For most of the models they mainly consist of basic signals (statistics) 
-such as Term Frequency (TF), Inverted Document Frequency (IDF), 
-Document Length Normalization (DLN) and other collection statistics \cite{Fang:2004:FSI:1008992.1009004}. 
-We separate and organize these conditions and make them as the context of 
-these ranking models since they are the theoretical foundation of these 
-retrieval functions.
-With this context one interesting question here would be: 
+of any other terms, and   
+(2) the models consist of basic signals (statistics) such as 
+Term Frequency (TF), Inverted Document Frequency (IDF), 
+Document Length Normalization (DLN) and other collection statistics 
+\cite{Fang:2004:FSI:1008992.1009004}. 
+The commonalities could be viewed as the context of these ranking models 
+since they are the theoretical foundation of these retrieval functions.
+With this context some interesting questions here would be: 
 it remains unclear whether we have reached the performance upper bound for 
 such retrieval models. 
 If so, what is the upper bound performance? If not, how can we do better?
@@ -137,7 +142,8 @@ search results. All the simplified functions can then be generalized to a
 general function form for single-term queries. As a result, the problem of 
 finding the upper bound of retrieval function utilizing basic ranking signals 
 becomes that of finding the optimal performance of the generalized retrieval 
-function. We propose to use cost/gain analysis to solve the problem \cite{export:132652,export:68133,export:81144}. 
+function. We propose to use cost/gain analysis to solve the problem 
+\cite{export:132652,export:68133,export:81144}. 
 As the estimated performance upper bound of simplified/generalized model is 
 in general better than the existing ranking models, our finding provides the 
 practical foundation of the potentially more effective ranking models for 
@@ -174,7 +180,8 @@ We further find that using category or description to build a user profile
 is not enough: category of places is too general to capture a user's 
 underlying needs; while the text description of a place is too specific to 
 be generalized to other places. 
-In other studies \cite{udel:treccs2013,udel:treccs2014,udel:treccs2015,Yang:2013:OUP:2499178.2499191,Yang2015}
+In other studies 
+\cite{udel:treccs2013,udel:treccs2014,udel:treccs2015,Yang:2013:OUP:2499178.2499191,Yang2015}
 we leverage opinion, 
 i.e. opinion ratings and the associated text reviews, to construct an 
 opinionated user profile. By doing like this we aim to explain 
