@@ -28,7 +28,7 @@ On the other hand, an IR system could also be mainly for researchers.
 For IR researchers who are interested in understanding the IR ranking models, 
 what they want is the IR system where they can modify the ranking model of 
 the system more easily and quickly, test it, iterate to next round.
-In our work we focus on two IR systems which are both related long-term 
+This proposal focuses on two IR systems which are both related long-term 
 information retrieval task. The first one is contextual suggestion which is 
 mainly for end users and the other one is ranking model performance upper 
 bound analysis using unified evaluation system which is mainly for IR 
@@ -36,13 +36,14 @@ researchers. Specifically, we explorer the context and its impact for these
 two systems.
 
 The word ``\textit{Context}'' is originally defined as 
-``the set of circumstances or facts that surround a particular event, situation, etc.''
-In our work, context is extensively studied in order to reveal and quantify 
+``the set of circumstances or facts that surround a particular event, 
+situation, etc.''
+In this proposal context is studied in order to reveal and quantify 
 its impact for different research problems. We will show more details 
 in the following.
 
 \section{Contextual Suggestion}
-Another research endeavor of our work is to provide better IR system for 
+Another research endeavor is to provide better IR system for 
 end users. This kind of system is different from the previous one since end 
 users do not necessarily know about the implementation or design details of 
 the system -- what they want is how to use the system to meet their information 
@@ -51,7 +52,7 @@ The task of contextual suggestion is to recommend interesting venues to the
 users based on contextual information such as geographic location, 
 temporal information and user's activity history. Traditionally context of 
 this problem is often referred to the physical conditions of the users. 
-In our work we argue that user's long-term, static preferences should also 
+This proposal proposes that user's long-term, static preferences should also 
 be included in the context as it is the key condition we have to rely on.
 
 There are two necessary steps to tackle the contextual suggestion problem 
@@ -90,14 +91,14 @@ profile is used to rank the candidates. We tried different representations
 of the text reviews when modeling the profiles. We further apply 
 Learning-to-Rank (LTR) method to the similarity scores for the ranking method. 
 Experiment results on TREC collections and a self-crawled Yelp collection 
-validate the effectiveness of our method.
+validate the effectiveness of the method.
 
 \section{Unified IR Evaluation System}
 The first problem we address is a long standing problem in evaluating the 
 effectiveness of IR system\footnote{There are several aspects in IR system 
-can be evaluated. In our work, we focus on the evaluation of effectiveness 
-of the system. Specifically only the effectiveness of the ranking model is 
-investigated}. 
+can be evaluated. In the proposal, it focuses on the evaluation of 
+effectiveness of the system. Specifically only the effectiveness of the 
+ranking model is investigated}. 
 % Many different techniques can be applied to address the effectiveness of 
 % the system. For example, Natural Language Processing (NLP) techniques \cite{Voorhees:1999:NLP:645857.669935,Mihalcea:2011:GNL:1984806}. 
 % Topic Modeling \cite{Blei:2003:LDA:944919.944937,Hofmann:1999:PLS:312624.312649}.
@@ -121,7 +122,7 @@ IR community. People continuously report different performances on the same
 baseline model \cite{Yang:2016:RSI:2970398.2970415} and this casts doubt on 
 the real effectiveness of the proposed models.
 
-In our work, two systems, namely VIRLab (Virtual IR Lab) 
+In this proposal, two systems, namely VIRLab (Virtual IR Lab) 
 \cite{Fang:2014:VWV:2600428.2611178} 
 and RISE (Reproducible Information retrieval System Evaluation) 
 \cite{Yang:2016:RSI:2970398.2970415} are proposed in order to offer 
