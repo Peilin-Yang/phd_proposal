@@ -130,7 +130,7 @@ a unified context to the IR community for standardization of comparing
 ranking models. The uniqueness and the advantage of these two systems is 
 that they offer centralized and controlled IR evaluation systems which 
 facilitate easy but trusted comparison of retrieval models. 
-With the help of these systems (in our case we use RISE) 
+With the help of these systems (this proposal uses RISE) 
 we are able to conduct a comprehensive reproducibility study for information 
 retrieval models. 
 In particular, we implement and evaluate more than 20 basic retrieval 
@@ -143,9 +143,9 @@ only one of them consistently generates worse performance than the one
 reported in the original paper. Moreover, we report the retrieval 
 performance of all the implemented retrieval functions over all the 16 
 TREC collections including recently released ClueWeb datasets. 
-To the best of our knowledge, this is the first time of reporting such a 
-large scale comparison of IR retrieval models. Such a comparison can be used 
-as the performance references of the selected models.
+This is the first time of reporting such a large scale comparison 
+of IR retrieval models. Such a comparison can be used as the performance 
+references of the selected models.
 
 
 \section{Boundary Theory of Bag-of-Terms Models}
@@ -183,7 +183,7 @@ This kind of variants makes it difficult to generalize the analysis.
 Moreover, typically there are one or more free parameters in the ranking 
 models which can be tuned via the training collections. 
 These free parameters make the analysis more complicated.
-In our work, we simplify the problem and just focus on single-term queries 
+We can simplify the problem and just focus on single-term queries 
 and study how to estimate the performance bound for retrieval functions 
 utilizing only basic ranking signals. 
 With only one term in a query, many retrieval functions can be greatly 
@@ -196,10 +196,10 @@ finding the upper bound of retrieval function utilizing basic ranking signals
 becomes that of finding the optimal performance of the generalized retrieval 
 function. We propose to use cost/gain analysis to solve the problem 
 \cite{export:132652,export:68133,export:81144}. 
-As the estimated performance upper bound of simplified/generalized model is 
-in general better than the existing ranking models, our finding provides the 
-practical foundation of the potentially more effective ranking models for 
-single term queries.
+As the estimated performance upper bound of simplified/generalized model 
+is in general better than the existing ranking models, this finding 
+provides the practical foundation of the potentially more effective 
+ranking models for single term queries.
 
 \section{Summary}
 
