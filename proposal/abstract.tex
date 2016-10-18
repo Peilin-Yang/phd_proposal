@@ -3,46 +3,40 @@
 %
 Information Retrieval (IR) is one of the most evolving research fields 
 and has drawn extensive attention in recent years. 
-There are different types of IR systems targeting to meet 
-different users' information needs. Two IR systems are of the most interest: (1) the contextual suggestion system that shows interesting venues to end users, (2) the evaluation system for IR researchers who are 
-interested in understanding the IR ranking models.
-In order to make better IR systems that are satisfied by both researchers 
-and end users, this proposal explorers the impact of 
+There are different types of IR systems aim to meet different users' 
+information needs. 
+These systems can be roughly split into two categories: 
+(1) the system for end users and, 
+(2) the system for IR researchers.
+In order to make better IR systems that are satisfied by both end users 
+and researchers, this proposal explorers the impact of 
 context in two specific long-term IR related tasks -- contextual suggestion 
 and ranking model performance upper bound analysis using unified evaluation 
 system.
 
-For contextual suggestion system it is commonly agreed that successful 
-modeling user profile is the key to the solution. As proposed here, user's 
-long-term preference should also be considered as part of the context of 
-this problem. 
-The first approach is to model the user profile using the venue's category 
-and description from user's activity history. This proposal further 
-improves the 
-method by leveraging the opinions from user's preference to model the 
-user profile. Such methodology utilizes the rich text associated 
-with the users which naturally fits the problem into IR domain. 
-By modeling the candidate suggestions in the similar fashion, 
-the similarities between the candidates and the user profile are used to 
-score the candidates. Experiments on TREC collections and a Yelp data 
-collection confirm the advantage of the method.
+For contextual suggestion system it is commonly agreed that modeling user 
+profile is the key to the solution. We argue that user's long-term 
+preference should also be considered as part of the context of this problem. 
+The first approach we used is to model the user profile using the venue's 
+category and description from user's activity history. 
+We further improve the method by leveraging the opinions from user's 
+preference to model the user profile. Such methodology utilizes the rich 
+text associated with the users which is more accuracy in terms of capturing 
+the reasons of user's preferences. 
+Experiments on TREC collections and a Yelp data collection confirm the 
+advantage of the two methods.
 
-A long standing problem of IR community is that newly proposed ranking models 
-are implemented and evaluated using various systems of researchers' choices 
-and such choices lead to the fact that different researchers reported 
-different results for the same baseline model. 
-The context -- the IR evaluation system used by researcher, 
-is apparently the cause of such problem. This fact casts doubts on the real 
-effectiveness of the proposed ranking models and it is essential for the IR 
-community to have a unified evaluation system so that ranking models can be 
-compared without considering the details -- usually other components of an 
-IR system, e.g. preprocessing of documents or the choice of evaluation 
-metrics. 
-This proposal proposes two unified IR evaluation systems to alleviate this problem. 
-VIRLab as the first attempt provides a web based IR evaluation system 
+A long standing problem of IR community is that different researchers 
+have reported different results for the same baseline model. 
+The context -- different IR evaluation systems used by researcher, 
+are the root cause of such problem. This fact casts doubts on the real 
+effectiveness of the proposed ranking models and it is essential for 
+the IR community to have a unified evaluation system so that ranking 
+models can be fairly compared.
+VIRLab as our first attempt and it provides a web based IR evaluation system 
 where the users of the system can implement their own models and get them 
 automatically evaluated.
-Another system RISE (Reproducible IR System Evaluation) is proposed in order 
+Another system RISE (Reproducible Ir System Evaluation) is proposed in order 
 to further improve VIRLab.
 RISE is the first ever known system that users of the system can collaborate 
 with each other and thus make the normalization of baseline models much more 
@@ -52,8 +46,8 @@ and the comprehensive results serve as the the performances reference of
 most widely used IR models.
 
 Based on the reproducibility experiment results of using RISE it seems that 
-the optimum performances of bag-of-terms ranking models do not improve a lot 
-on TREC collections for over 20 years. 
+the optimum performances of bag-of-terms ranking models do not improve a 
+lot on TREC collections for long time period. 
 This introduces another interesting question: does it exist the performance 
 upper bound for bag-of-terms models? To answer this question an extensive 
 investigation of the context -- the bag-of-terms document representation 
@@ -61,7 +55,7 @@ assumption and the statistics like term frequency and inverted document
 frequency with which the models usually play.
 For single term queries several ranking models can be transformed to a 
 simplified model. The cost/gain analysis which is commonly used in 
-learning-to-rank (LTR) domain is then applied in order to find the optimum 
+learning-to-rank (LTR) domain is applied in order to find the optimum 
 of single term queries for this simplified model.
 The result shows that although the performances of state-of-the-art 
 ranking models are quit close to the practical optimum there is still some 
