@@ -5,15 +5,27 @@ Information Retrieval (IR) is one of the most evolving research fields
 and has drawn extensive attention in recent years. 
 There are different types of IR systems targeting to meet 
 different users' information needs. Two IR systems are of the most interest 
-in our works: (1) the evaluation system for IR researchers who are 
-interested in understanding the IR ranking models, 
-(2) the contextual suggestion system that shows interesting venues to 
-end users.
-In order to make better aforementioned IR systems that are satisfied 
-for both researchers and end users, in our work we explorer the impact of 
-context in two specific long-term IR related tasks -- ranking model 
-performance upper bound analysis using unified evaluation system 
-and contextual suggestion.
+in our works: (1) the contextual suggestion system that shows interesting venues to end users, (2) the evaluation system for IR researchers who are 
+interested in understanding the IR ranking models.
+In order to make better IR systems that are satisfied by both researchers 
+and end users, in our work we explorer the impact of 
+context in two specific long-term IR related tasks -- contextual suggestion 
+and ranking model performance upper bound analysis using unified evaluation 
+system.
+
+For contextual suggestion system it is commonly agreed that successful 
+modeling user profile is the key to the solution. We argue that user's 
+long-term preference should also be considered as part of the context of 
+this problem. 
+Our first approach is to model the user profile using the venue's category 
+and description from user's activity history. We further improve the 
+method by leveraging the opinions from user's preference to model the 
+user profile. Such methodology utilizes the rich text associated 
+with the users which naturally fits the problem into IR domain. 
+By modeling the candidate suggestions in the similar fashion, 
+the similarities between the candidates and the user profile are used to 
+score the candidates. Experiments on TREC collections and a Yelp data 
+collection confirm the advantage of our method.
 
 A long standing problem of IR community is that newly proposed ranking models 
 are implemented and evaluated using various systems of researchers' choices 
@@ -55,20 +67,6 @@ single term queries for this simplified model.
 The result shows that although the performances of state-of-the-art 
 ranking models are quit close to the practical optimum there is still some 
 room for improvement.
-
-For contextual suggestion system it is commonly agreed that successful 
-modeling user profile is the key to the solution. We argue that user's 
-preference which is usually treated as a static factor should also be 
-considered as part of the context of this problem. 
-Our first approach is to model the user profile using the venue's category 
-and description from user's activity history. We further improve the 
-method by leveraging the opinions from user's preference to model the 
-user profile. Such methodology utilizes the rich text associated 
-with the users which naturally fits the problem into IR domain. 
-By modeling the candidate suggestions in the similar fashion, 
-the similarities between the candidates and the user profile are used to 
-score the candidates. Experiments on TREC collections and a Yelp data 
-collection confirm the advantage of our method.
 
 For the future work, there are mainly two directions we would like to explore more. 
 The first one is to quantify the impact of the context of unified 

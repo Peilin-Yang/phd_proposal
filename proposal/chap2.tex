@@ -5,127 +5,18 @@
 
 In this thesis, we investigate the impact of context in different IR systems. 
 Specifically, two kinds of systems are mainly explored. 
-The first one is the unified evaluation system where the context is the 
+The first one is the contextual suggestion. The key of solving this 
+problem is to build the user profile based on the user preference history. 
+We include user preference as part of the context of this problem as 
+this is the long term and thus static information need of the user.
+The other system is the unified evaluation system where the context is the 
 evaluation system itself on which the comparison of different ranking models 
 relies. With the help of the unified evaluation system we tried to 
 provide analytical performance upper bound for bag-of-terms ranking models 
 of which the context here are the statistics used by the models. 
-The other system is the contextual suggestion. The key of solving this 
-problem is to build the user profile based on the user preference history. 
-We include user preference as part of the context of this problem as 
-this is the long term and thus static information need of the user.
 Extensive work have been done on solving these research questions. 
 We now survey the related work in the literature and discuss the differences
 with our proposed approaches in detail.
-
-
-\section{Unified IR Evaluation System}
-
-There have been significant efforts on developing various web 
-services for IR evaluation. 
-Lin et al. \cite{conf/ecir/LinCTCCFIMV16} proposed an open-source 
-IR reproducibility challenge where they split the IR system into 
-pieces of components such as two kinds of tokenization methods and 
-four different IR toolkits. 
-By easily configuring different combinations of these components, we 
-can have a partially filled matrix indicating the performances of 
-specific combinations of the components. Such transparent 
-experiment set up makes it possible to have a better understanding about 
-the impact of different components. 
-Gollub et al. \cite{Gollub:2012:OIT:2348283.2348501} described a reference 
-implementation of their proposed IR evaluation web service which bears 
-the important properties like web dissemination and peer-to-peer 
-collaboration. 
-Hanbury et al. \cite{Hanbury:2010:ACE:1889174.1889194} reviewed some 
-of the existing automated IR evaluation approaches and proposed a 
-framework for web service based component-level IR system evaluation. 
-Lagun and Agichtein proposed a web service, which enables large scale 
-studies of remote users \cite{Lagun:2011:VEL:2009916.2009967}. 
-Their system focused on providing a platform that reproduces and 
-extends the previous findings on how users interact with the 
-search engine especially the search results. 
-
-Our developed systems {\em VIRLab} and {\em RISE} are closely related to 
-the ideas of Privacy Preserved Evaluation (PPE) 
-\cite{Fang:2014:VWV:2600428.2611178}
-and Evaluation as a Service (EaaS) 
-\cite{rao:ecir:2015,Lin:2013:ESI:2568388.2568390,Lin:2014:ISE:2567948.2577014}. 
-VIRLab \cite{Fang:2014:VWV:2600428.2611178} provides a web service
-for users to implement retrieval functions. It is mainly designed
-to facilitate teaching IR models. RISE is also designed as a 
-web service to provide a unified interface for the users to evaluate their 
-models/algorithms. This design enables the system to host the data 
-collections instead of shipping the data collections to researchers, 
-which can ensure the privacy of the collections. 
-Users of RISE can not see the functions implemented by other users. 
-The uniqueness of 
-{\em RISE} system is that it is specifically designed to facilitate the 
-implementation and evaluation of retrieval functions.  
-
-The SIGIR 2015 Workshop on Reproducibility, Inexplicability, and 
-Generalizability of Results (RIGOR) \cite{Hopfgartner:2015:REE:2795403.2795416} 
-is one of the venues that encourage the study of reproducibility. 
-Their reproducibility challenge invited developers 
-of 7 open-source search engines to provide baselines for TREC GOV2 
-collection.
-Trotman et. al. \cite{adcs14} and Muhleisen el. al. \cite{Muhleisen:2014:ODG:2600428.2609460} 
-have also tried to reproduce retrieval results for IR models, but the
-number of retrieval functions and the number of collections used in these studies 
-(1 function 1 collection for \cite{adcs14} and 9 functions  
-10 collections for \cite{Muhleisen:2014:ODG:2600428.2609460})
-are not as large as what we studied in this paper. 
-
-Compared with the previous studies, our work is different in the following
-two aspects. First, the {\em RISE} system is specifically designed for 
-the reproducibility study of retrieval models. It hides details about 
-collection processing and evaluation, and enables users to focus on 
-only the implementation of retrieval models. Due to its flexibility, 
-we are able to implement and compare a wide range of retrieval functions 
-that were not implemented in any other open-source toolkits. Second, 
-our reproducibility study includes more retrieval functions and more data 
-collections. The ultimate goal of the {\em RISE} system is to provide 
-a complete set of benchmark results of IR models. 
-
-
-\section{Boundary Theory of Bag-of-Terms Models}
-
-Although there are lots of effective ranking models proposed by researchers, 
-there are fewer studies dedicated to the theoretical analysis of their 
-performances upper bound. One related domain is the constraint analysis 
-\cite{Fang:2004:FSI:1008992.1009004} which proposes formal constraints 
-that a reasonable ranking model should bear. Examples of the constraints 
-including how should a ranking model incorporate TF, how to regulate 
-the interaction of TF and DL, how to penalize long document in the 
-collection, etc. The constraint analysis provides a general guide of how 
-a reasonable ranking model should be designed. Our work further explores 
-this direction by providing the practical performance upper bound as 
-well as the optimal parameters which helps to fine tune the constraint 
-theory. 
-
-Our estimation method is mostly inspired by the RankNet 
-\cite{export:68133,export:132652} and the LambdaRank 
-\cite{export:132652,export:81144} which are 
-successful in the learning to rank domain. 
-In their works they apply the pair-wise documents comparison for a 
-specific query which is also adopted by our work.
-However, we did two different things in our work: 
-(1) the aforementioned techniques apply neural network as the underlying 
-model while we follow the rationale proposed by some classic ranking 
-model, i.e. the ranking score should be positively correlated with TF and 
-inversely correlated with DL, to find the local optimum of the generalized 
-ranking models.
-(2) we aim to optimize MAP instead of NDCG and we proposed a simplified 
-equation for calculating the difference of MAP if two documents are 
-swapped in the ranking list which can make the analysis more efficiency. 
-There is another work which indeed directly optimizes MAP called SVMMAP 
-\cite{Yue:2007:SVM:1277741.1277790}. SVMMAP is actually another learning 
-to ranking algorithm based on support vector machine. It performs 
-optimization only on a working set of constraints which is extended with 
-the most violated constraint at each optimization step. 
-Taylor et al. \cite{Taylor:2006:OMR:1183614.1183698} used the cost 
-analysis to predicate a family of BM25 ranking models. They however 
-did not apply the gain analysis which has shown to be superior in 
-our experiments.
 
 
 \section{Contextual Suggestion}
@@ -294,3 +185,112 @@ summarization process in other sources and then assemble
 all the extracted summaries together into a {\em structural} way.  
 Another main difference of our work from previous studies is to 
 utilize the user profile to generate personalized summaries.  
+
+\section{Unified IR Evaluation System}
+
+There have been significant efforts on developing various web 
+services for IR evaluation. 
+Lin et al. \cite{conf/ecir/LinCTCCFIMV16} proposed an open-source 
+IR reproducibility challenge where they split the IR system into 
+pieces of components such as two kinds of tokenization methods and 
+four different IR toolkits. 
+By easily configuring different combinations of these components, we 
+can have a partially filled matrix indicating the performances of 
+specific combinations of the components. Such transparent 
+experiment set up makes it possible to have a better understanding about 
+the impact of different components. 
+Gollub et al. \cite{Gollub:2012:OIT:2348283.2348501} described a reference 
+implementation of their proposed IR evaluation web service which bears 
+the important properties like web dissemination and peer-to-peer 
+collaboration. 
+Hanbury et al. \cite{Hanbury:2010:ACE:1889174.1889194} reviewed some 
+of the existing automated IR evaluation approaches and proposed a 
+framework for web service based component-level IR system evaluation. 
+Lagun and Agichtein proposed a web service, which enables large scale 
+studies of remote users \cite{Lagun:2011:VEL:2009916.2009967}. 
+Their system focused on providing a platform that reproduces and 
+extends the previous findings on how users interact with the 
+search engine especially the search results. 
+
+Our developed systems {\em VIRLab} and {\em RISE} are closely related to 
+the ideas of Privacy Preserved Evaluation (PPE) 
+\cite{Fang:2014:VWV:2600428.2611178}
+and Evaluation as a Service (EaaS) 
+\cite{rao:ecir:2015,Lin:2013:ESI:2568388.2568390,Lin:2014:ISE:2567948.2577014}. 
+VIRLab \cite{Fang:2014:VWV:2600428.2611178} provides a web service
+for users to implement retrieval functions. It is mainly designed
+to facilitate teaching IR models. RISE is also designed as a 
+web service to provide a unified interface for the users to evaluate their 
+models/algorithms. This design enables the system to host the data 
+collections instead of shipping the data collections to researchers, 
+which can ensure the privacy of the collections. 
+Users of RISE can not see the functions implemented by other users. 
+The uniqueness of 
+{\em RISE} system is that it is specifically designed to facilitate the 
+implementation and evaluation of retrieval functions.  
+
+The SIGIR 2015 Workshop on Reproducibility, Inexplicability, and 
+Generalizability of Results (RIGOR) \cite{Hopfgartner:2015:REE:2795403.2795416} 
+is one of the venues that encourage the study of reproducibility. 
+Their reproducibility challenge invited developers 
+of 7 open-source search engines to provide baselines for TREC GOV2 
+collection.
+Trotman et. al. \cite{adcs14} and Muhleisen el. al. \cite{Muhleisen:2014:ODG:2600428.2609460} 
+have also tried to reproduce retrieval results for IR models, but the
+number of retrieval functions and the number of collections used in these studies 
+(1 function 1 collection for \cite{adcs14} and 9 functions  
+10 collections for \cite{Muhleisen:2014:ODG:2600428.2609460})
+are not as large as what we studied in this paper. 
+
+Compared with the previous studies, our work is different in the following
+two aspects. First, the {\em RISE} system is specifically designed for 
+the reproducibility study of retrieval models. It hides details about 
+collection processing and evaluation, and enables users to focus on 
+only the implementation of retrieval models. Due to its flexibility, 
+we are able to implement and compare a wide range of retrieval functions 
+that were not implemented in any other open-source toolkits. Second, 
+our reproducibility study includes more retrieval functions and more data 
+collections. The ultimate goal of the {\em RISE} system is to provide 
+a complete set of benchmark results of IR models. 
+
+
+\section{Boundary Theory of Bag-of-Terms Models}
+
+Although there are lots of effective ranking models proposed by researchers, 
+there are fewer studies dedicated to the theoretical analysis of their 
+performances upper bound. One related domain is the constraint analysis 
+\cite{Fang:2004:FSI:1008992.1009004} which proposes formal constraints 
+that a reasonable ranking model should bear. Examples of the constraints 
+including how should a ranking model incorporate TF, how to regulate 
+the interaction of TF and DL, how to penalize long document in the 
+collection, etc. The constraint analysis provides a general guide of how 
+a reasonable ranking model should be designed. Our work further explores 
+this direction by providing the practical performance upper bound as 
+well as the optimal parameters which helps to fine tune the constraint 
+theory. 
+
+Our estimation method is mostly inspired by the RankNet 
+\cite{export:68133,export:132652} and the LambdaRank 
+\cite{export:132652,export:81144} which are 
+successful in the learning to rank domain. 
+In their works they apply the pair-wise documents comparison for a 
+specific query which is also adopted by our work.
+However, we did two different things in our work: 
+(1) the aforementioned techniques apply neural network as the underlying 
+model while we follow the rationale proposed by some classic ranking 
+model, i.e. the ranking score should be positively correlated with TF and 
+inversely correlated with DL, to find the local optimum of the generalized 
+ranking models.
+(2) we aim to optimize MAP instead of NDCG and we proposed a simplified 
+equation for calculating the difference of MAP if two documents are 
+swapped in the ranking list which can make the analysis more efficiency. 
+There is another work which indeed directly optimizes MAP called SVMMAP 
+\cite{Yue:2007:SVM:1277741.1277790}. SVMMAP is actually another learning 
+to ranking algorithm based on support vector machine. It performs 
+optimization only on a working set of constraints which is extended with 
+the most violated constraint at each optimization step. 
+Taylor et al. \cite{Taylor:2006:OMR:1183614.1183698} used the cost 
+analysis to predicate a family of BM25 ranking models. They however 
+did not apply the gain analysis which has shown to be superior in 
+our experiments.
+
